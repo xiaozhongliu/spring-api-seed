@@ -22,7 +22,7 @@ public class Bookmark {
     private Account account;
 
     // default ctor required by jpa
-    Bookmark() {
+    public Bookmark() {
     }
 
     public Bookmark(String uri, String description, Account account) {

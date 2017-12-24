@@ -3,6 +3,7 @@ package com.webapi.newbie.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,11 +22,11 @@ public class Account {
     private String password;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
     private Set<Bookmark> bookmarks = new HashSet<>();
 
     // default ctor required by jpa
-    Account() {
+    public Account() {
     }
 
     public Account(String username, String password) {
