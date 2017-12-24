@@ -85,7 +85,7 @@ public class BookmarkContollerTest {
 
     @Test
     public void readSingleBookmark() throws Exception {
-        int bookmarkId = this.bookmarkList.get(0).getId().intValue();
+        int bookmarkId = this.bookmarkList.get(0).id.intValue();
         mockMvc.perform(get("/users/" + username + "/bookmarks/" + bookmarkId)).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType)).andExpect(jsonPath("$.code", is(1)))
                 .andExpect(jsonPath("$.data.id", is(bookmarkId)))

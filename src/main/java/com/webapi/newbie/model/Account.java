@@ -1,6 +1,5 @@
 package com.webapi.newbie.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,19 +10,22 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Account {
 
     @Id
     @GeneratedValue
-    private Long id;
+    public Long id;
 
-    private String username;
-    private String password;
+    public String username;
+    public String password;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
-    private Set<Bookmark> bookmarks = new HashSet<>();
+    public Set<Bookmark> bookmarks;
 
     // default ctor required by jpa
     public Account() {
@@ -34,31 +36,4 @@ public class Account {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Bookmark> getBookmarks() {
-        return bookmarks;
-    }
 }

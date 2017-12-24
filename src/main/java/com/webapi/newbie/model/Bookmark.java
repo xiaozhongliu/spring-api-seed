@@ -7,19 +7,22 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Bookmark {
 
     @Id
     @GeneratedValue
-    private Long id;
+    public Long id;
 
-    private String uri;
-    private String description;
+    public String uri;
+    public String description;
 
     @JsonIgnore
     @ManyToOne
-    private Account account;
+    public Account account;
 
     // default ctor required by jpa
     public Bookmark() {
@@ -28,38 +31,6 @@ public class Bookmark {
     public Bookmark(String uri, String description, Account account) {
         this.uri = uri;
         this.description = description;
-        this.account = account;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
         this.account = account;
     }
 
