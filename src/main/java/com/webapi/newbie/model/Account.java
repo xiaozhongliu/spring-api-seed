@@ -3,6 +3,7 @@ package com.webapi.newbie.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,12 +21,18 @@ public class Account {
     @GeneratedValue
     public Long id;
 
+    @Column(nullable = false)
     public String username;
+    @Column(nullable = false)
     public String password;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
     public Set<Bookmark> bookmarks;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
+    public Set<AccountRole> roles;
 
     // default ctor required by jpa
     public Account() {

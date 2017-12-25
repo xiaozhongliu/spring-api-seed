@@ -67,9 +67,9 @@ public class BookmarkContollerTest {
 
         this.account = accountRepo.save(new Account(username, "password"));
         this.bookmarkList
-                .add(bookmarkRepo.save(new Bookmark("http://bookmark.com/1/" + username, "A description", account)));
+                .add(bookmarkRepo.save(new Bookmark(account, "http://bookmark.com/1/" + username, "A description")));
         this.bookmarkList
-                .add(bookmarkRepo.save(new Bookmark("http://bookmark.com/2/" + username, "A description", account)));
+                .add(bookmarkRepo.save(new Bookmark(account, "http://bookmark.com/2/" + username, "A description")));
     }
 
     @After

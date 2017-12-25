@@ -25,8 +25,8 @@ public class Application {
     //             new String[] { "jhoeller", "dsyer", "pwebb", "ogierke", "rwinch", "mfisher", "mpollack", "jlong" })
     //             .forEach(username -> {
     //                 Account account = accountRepo.save(new Account(username, "password"));
-    //                 bookmarkRepo.save(new Bookmark("http://bookmark.com/1/" + username, "A description", account));
-    //                 bookmarkRepo.save(new Bookmark("http://bookmark.com/2/" + username, "A description", account));
+    //                 bookmarkRepo.save(new Bookmark(account, "http://bookmark.com/1/" + username, "A description"));
+    //                 bookmarkRepo.save(new Bookmark(account, "http://bookmark.com/2/" + username, "A description"));
     //             });
     // }
 

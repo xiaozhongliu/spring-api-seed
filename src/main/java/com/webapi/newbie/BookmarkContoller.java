@@ -49,7 +49,7 @@ public class BookmarkContoller {
         this.validateUser(username);
 
         Object result = this.accountRepo.findByUsername(username).map(account -> {
-            Bookmark bookmark = bookmarkRepo.save(new Bookmark(input.uri, input.description, account));
+            Bookmark bookmark = bookmarkRepo.save(new Bookmark(account, input.uri, input.description));
             return bookmark;
         }).orElse(null);
         return new Result(1, "success", result);

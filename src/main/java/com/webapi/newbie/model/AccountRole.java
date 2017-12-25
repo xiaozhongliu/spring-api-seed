@@ -13,28 +13,26 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Bookmark {
+public class AccountRole {
 
     @Id
     @GeneratedValue
     public Long id;
 
     @Column(nullable = false)
-    public String uri;
-    public String description;
+    public String role;
 
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     public Account account;
 
     // default ctor required by jpa
-    public Bookmark() {
+    public AccountRole() {
     }
 
-    public Bookmark(Account account, String uri, String description) {
+    public AccountRole(Account account, String role) {
+        this.role = role;
         this.account = account;
-        this.uri = uri;
-        this.description = description;
     }
 
 }
