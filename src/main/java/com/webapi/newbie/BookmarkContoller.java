@@ -7,6 +7,7 @@ import com.webapi.newbie.repo.AccountRepo;
 import com.webapi.newbie.repo.BookmarkRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,17 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "users/{username}/bookmarks")
+@RequestMapping(path = "/{username}/bookmarks")
+@PreAuthorize("hasRole('ADMIN')")
 public class BookmarkContoller {
 
-    private final BookmarkRepo bookmarkRepo;
-    private final AccountRepo accountRepo;
-
     @Autowired
-    BookmarkContoller(BookmarkRepo bookmarkRepo, AccountRepo accountRepo) {
-        this.bookmarkRepo = bookmarkRepo;
-        this.accountRepo = accountRepo;
-    }
+    private BookmarkRepo bookmarkRepo;
+    @Autowired
+    private AccountRepo accountRepo;
 
     @GetMapping
     public @ResponseBody Result getBookmarkList(@PathVariable String username) {

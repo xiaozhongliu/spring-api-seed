@@ -1,5 +1,6 @@
 package com.webapi.newbie.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,6 +26,7 @@ public class Account {
     public String username;
     @Column(nullable = false)
     public String password;
+    public Date lastPasswordResetDate;
 
     @JsonIgnore
     @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })

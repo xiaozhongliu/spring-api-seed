@@ -1,26 +1,28 @@
 package com.webapi.newbie.model;
 
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class JwtUser implements UserDetails {
 
-    private final String id;
+    private final Long id;
     private final String username;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
+    private final Date lastPasswordResetDate;
 
-    public JwtUser(String id, String username, String password, Collection<? extends GrantedAuthority> authorities,
+    public JwtUser(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities,
             Date lastPasswordResetDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class JwtUser implements UserDetails {
     }
 
     @JsonIgnore
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,6 +63,12 @@ public class JwtUser implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    // 这个是自定义的，返回上次密码重置日期
+    @JsonIgnore
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
     }
 
 }

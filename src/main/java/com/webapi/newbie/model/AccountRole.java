@@ -31,8 +31,8 @@ public class AccountRole {
     }
 
     public AccountRole(Account account, String role) {
-        this.role = role;
         this.account = account;
+        this.role = role;
     }
 
 }

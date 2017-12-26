@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://fake:3306/test
+    username: liuxiaozhong
+    password: JbKRTggMsuFOwPsJPjZK
+
+jwt:
+  header: Authorization
+  secret: SGXgvJ92pf
+  expiration: 8640 # 100 days
+  tokenHead: "Bearer "
+  route:
+    auth:
+      path: "auth/login"
+      refresh: "auth/refresh"
+      register: "auth/register"

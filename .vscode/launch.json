@@ -6,13 +6,13 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch)-Application<spring-api-newbie>",
+            "name": "Debug (Launch)-Application<newbie>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
             "mainClass": "com.webapi.newbie.Application",
-            "projectName": "spring-api-newbie",
+            "projectName": "newbie",
             "args": ""
         },
         {

@@ -5,6 +5,7 @@ import com.webapi.newbie.model.Result;
 import com.webapi.newbie.repo.AccountRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,15 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "users")
+@RequestMapping(path = "/users")
+@PreAuthorize("hasRole('USER')")
 public class UserController {
 
-    private final AccountRepo accountRepo;
-
     @Autowired
-    UserController(AccountRepo accountRepo) {
-        this.accountRepo = accountRepo;
-    }
+    private AccountRepo accountRepo;
 
     @GetMapping
     public @ResponseBody Result getAccountList() {
