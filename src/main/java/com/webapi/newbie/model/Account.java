@@ -1,11 +1,13 @@
 package com.webapi.newbie.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -29,12 +31,11 @@ public class Account {
     public Date lastPasswordResetDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
-    public Set<Bookmark> bookmarks;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public Set<Bookmark> bookmarks = new HashSet<Bookmark>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "account", cascade = { CascadeType.REMOVE })
-    public Set<AccountRole> roles;
+    @OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    public Set<AccountRole> roles = new HashSet<AccountRole>();
 
     // default ctor required by jpa
     public Account() {

@@ -26,7 +26,6 @@ public class AuthServiceImpl implements AuthService {
     private UserDetailsService userDetailsService;
     private JwtTokenUtil jwtTokenUtil;
     private AccountRepo accountRepo;
-    private AccountRoleRepo accountRoleRepo;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
@@ -49,9 +48,11 @@ public class AuthServiceImpl implements AuthService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         account.password = encoder.encode(account.password);
         account.lastPasswordResetDate = new Date();
-        Account savedAccount = accountRepo.save(account);
 
-        accountRoleRepo.save(new AccountRole(savedAccount, "USER"));
+        AccountRole accountRole = new AccountRole(account, "USER");
+        account.roles.add(accountRole);
+
+        Account savedAccount = accountRepo.save(account);
 
         return savedAccount;
     }
