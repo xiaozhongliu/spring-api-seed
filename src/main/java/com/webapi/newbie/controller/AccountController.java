@@ -1,36 +1,38 @@
-package com.webapi.newbie;
+package com.webapi.newbie.controller;
 
-import com.webapi.newbie.model.Account;
+import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.model.Result;
-import com.webapi.newbie.repo.AccountRepo;
+import com.webapi.newbie.service.impl.AccountServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author xiaozhong
+ * @since 2017-12-30
+ */
 @Controller
-@RequestMapping(path = "/users")
-@PreAuthorize("hasRole('USER')")
-public class UserController {
+@RequestMapping("/account")
+public class AccountController {
 
     @Autowired
-    private AccountRepo accountRepo;
+    private AccountServiceImpl accountService;
 
     @GetMapping
     @ResponseBody
     public Result getAccountList() {
-        Iterable<Account> accounts = accountRepo.findAll();
+        Iterable<Account> accounts = accountService.selectAll();
         return new Result(1, "success", accounts);
     }
 
     @GetMapping(path = "/{username}")
     @ResponseBody
     public Result getAccount(@PathVariable String username) {
-        Account account = accountRepo.findByUsername(username).orElse(null);
+        Account account = accountService.selectByUsername(username);
         return new Result(1, "success", account);
     }
 

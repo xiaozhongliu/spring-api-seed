@@ -1,13 +1,12 @@
-package com.webapi.newbie;
+package com.webapi.newbie.controller;
 
-import com.webapi.newbie.error.UserNotFoundException;
-import com.webapi.newbie.model.Bookmark;
+import com.webapi.newbie.entity.Account;
+import com.webapi.newbie.entity.Bookmark;
 import com.webapi.newbie.model.Result;
-import com.webapi.newbie.repo.AccountRepo;
-import com.webapi.newbie.repo.BookmarkRepo;
+import com.webapi.newbie.service.impl.AccountServiceImpl;
+import com.webapi.newbie.service.impl.BookmarkServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,22 +15,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author xiaozhong
+ * @since 2017-12-30
+ */
 @Controller
-@RequestMapping(path = "/{username}/bookmarks")
-@PreAuthorize("hasRole('ADMIN')")
-public class BookmarkContoller {
+@RequestMapping("/bookmark")
+public class BookmarkController {
 
     @Autowired
-    private BookmarkRepo bookmarkRepo;
+    private BookmarkServiceImpl bookmarkService;
     @Autowired
-    private AccountRepo accountRepo;
+    private AccountServiceImpl accountService;
 
     @GetMapping
     @ResponseBody
     public Result getBookmarkList(@PathVariable String username) {
         this.validateUser(username);
 
-        Iterable<Bookmark> bookmarks = bookmarkRepo.findByAccountUsername(username);
+        Iterable<Bookmark> bookmarks = bookmarkService.selectByUsername(username);
         return new Result(1, "success", bookmarks);
     }
 
@@ -40,7 +42,7 @@ public class BookmarkContoller {
     public Result getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
         this.validateUser(username);
 
-        Bookmark bookmark = bookmarkRepo.findOne(bookmarkId);
+        Bookmark bookmark = bookmarkService.selectById(bookmarkId);
         return new Result(1, "success", bookmark);
     }
 
@@ -49,17 +51,16 @@ public class BookmarkContoller {
     public Result addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
         this.validateUser(username);
 
-        Bookmark result = this.accountRepo.findByUsername(username).map(account -> {
-            return bookmarkRepo.save(new Bookmark(account, input.uri, input.description));
-        }).orElse(null);
-        return new Result(1, "success", result);
+        Account account = accountService.selectByUsername(username);
+        bookmarkService.insert(new Bookmark(account.id, input.uri, input.description));
+        return new Result(1, "success");
     }
 
     /**
      * private helpers
      */
     private void validateUser(String username) {
-        this.accountRepo.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
+        accountService.selectByUsername(username);
     }
 
 }

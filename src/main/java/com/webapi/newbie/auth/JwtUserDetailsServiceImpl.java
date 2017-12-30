@@ -1,9 +1,11 @@
 package com.webapi.newbie.auth;
 
-import java.util.Optional;
+import java.util.List;
 
-import com.webapi.newbie.model.Account;
-import com.webapi.newbie.repo.AccountRepo;
+import com.webapi.newbie.entity.Account;
+import com.webapi.newbie.entity.AccountRole;
+import com.webapi.newbie.service.impl.AccountRoleServiceImpl;
+import com.webapi.newbie.service.impl.AccountServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,14 +17,17 @@ import org.springframework.stereotype.Service;
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AccountRepo accountRepo;
+    private AccountServiceImpl accountService;
+    @Autowired
+    private AccountRoleServiceImpl accountRoleService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Account> account = accountRepo.findByUsername(username);
+        Account account = accountService.selectByUsername(username);
+        List<AccountRole> roles = accountRoleService.selectByUsername(username);
 
-        if (account.isPresent()) {
-            return JwtUserFactory.create(account.get());
+        if (account != null) {
+            return JwtUserFactory.create(account, roles);
         }
 
         throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));

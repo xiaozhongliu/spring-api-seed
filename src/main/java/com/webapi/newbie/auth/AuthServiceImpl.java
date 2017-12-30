@@ -2,10 +2,11 @@ package com.webapi.newbie.auth;
 
 import java.util.Date;
 
-import com.webapi.newbie.model.Account;
-import com.webapi.newbie.model.AccountRole;
+import com.webapi.newbie.entity.Account;
+import com.webapi.newbie.entity.AccountRole;
 import com.webapi.newbie.model.JwtUser;
-import com.webapi.newbie.repo.AccountRepo;
+import com.webapi.newbie.service.impl.AccountRoleServiceImpl;
+import com.webapi.newbie.service.impl.AccountServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,36 +25,38 @@ public class AuthServiceImpl implements AuthService {
     private AuthenticationManager authenticationManager;
     private UserDetailsService userDetailsService;
     private JwtTokenUtil jwtTokenUtil;
-    private AccountRepo accountRepo;
+    private AccountServiceImpl accountService;
+    private AccountRoleServiceImpl accountRoleService;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
     @Autowired
     public AuthServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
-            JwtTokenUtil jwtTokenUtil, AccountRepo accountRepo) {
+            JwtTokenUtil jwtTokenUtil, AccountServiceImpl accountService, AccountRoleServiceImpl accountRoleService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
-        this.accountRepo = accountRepo;
+        this.accountService = accountService;
+        this.accountRoleService = accountRoleService;
     }
 
     @Override
-    public Account register(Account account) {
-        if (accountRepo.findByUsername(account.username).isPresent()) {
-            return null;
+    public boolean register(Account account) {
+        if (accountService.selectByUsername(account.username) != null) {
+            return false;
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         account.password = encoder.encode(account.password);
         account.lastPasswordResetDate = new Date();
 
-        AccountRole accountRole = new AccountRole(account, "ROLE_USER");
-        account.roles.add(accountRole);
+        AccountRole accountRole = new AccountRole(account.id, "ROLE_USER");
 
-        Account savedAccount = accountRepo.save(account);
+        boolean accountResult = accountService.insert(account);
+        boolean accountRoleResult = accountRoleService.insert(accountRole);
 
-        return savedAccount;
+        return accountResult && accountRoleResult;
     }
 
     @Override

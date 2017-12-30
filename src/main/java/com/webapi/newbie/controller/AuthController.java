@@ -1,10 +1,10 @@
-package com.webapi.newbie;
+package com.webapi.newbie.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.webapi.newbie.auth.AuthService;
 import com.webapi.newbie.auth.JwtAuthResponse;
-import com.webapi.newbie.model.Account;
+import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.model.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * @author xiaozhong
+ * @since 2017-12-30
+ */
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Value("${jwt.header}")
@@ -30,11 +34,11 @@ public class AuthController {
 
     @PostMapping(path = "${jwt.route.auth.register}")
     public ResponseEntity<?> register(@RequestBody Account account) throws AuthenticationException {
-        Account result = authService.register(account);
-        if (result == null) {
+        boolean result = authService.register(account);
+        if (!result) {
             return ResponseEntity.badRequest().body("account already exists");
         }
-        return ResponseEntity.ok(new Result(1, "success", result));
+        return ResponseEntity.ok(new Result(1, "success"));
     }
 
     @PostMapping(path = "${jwt.route.auth.path}")

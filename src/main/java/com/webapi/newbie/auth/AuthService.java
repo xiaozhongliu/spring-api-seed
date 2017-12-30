@@ -1,10 +1,10 @@
 package com.webapi.newbie.auth;
 
-import com.webapi.newbie.model.Account;
+import com.webapi.newbie.entity.Account;
 
 public interface AuthService {
 
-    Account register(Account account);
+    boolean register(Account account);
 
     String login(String username, String password);
 

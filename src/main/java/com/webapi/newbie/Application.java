@@ -7,8 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 // import org.springframework.context.annotation.Bean;
 
-// import com.webapi.newbie.model.Account;
-// import com.webapi.newbie.model.Bookmark;
+// import com.webapi.newbie.entity.Account;
+// import com.webapi.newbie.entity.Bookmark;
 // import com.webapi.newbie.repo.AccountRepo;
 // import com.webapi.newbie.repo.BookmarkRepo;
 
