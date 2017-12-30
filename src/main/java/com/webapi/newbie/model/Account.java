@@ -31,10 +31,10 @@ public class Account {
     public Date lastPasswordResetDate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public Set<Bookmark> bookmarks = new HashSet<Bookmark>();
 
-    @OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "account", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER)
     public Set<AccountRole> roles = new HashSet<AccountRole>();
 
     // default ctor required by jpa

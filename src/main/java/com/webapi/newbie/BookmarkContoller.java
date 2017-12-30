@@ -27,7 +27,8 @@ public class BookmarkContoller {
     private AccountRepo accountRepo;
 
     @GetMapping
-    public @ResponseBody Result getBookmarkList(@PathVariable String username) {
+    @ResponseBody
+    public Result getBookmarkList(@PathVariable String username) {
         this.validateUser(username);
 
         Iterable<Bookmark> bookmarks = bookmarkRepo.findByAccountUsername(username);
@@ -35,7 +36,8 @@ public class BookmarkContoller {
     }
 
     @GetMapping(path = "/{bookmarkId}")
-    public @ResponseBody Result getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
+    @ResponseBody
+    public Result getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
         this.validateUser(username);
 
         Bookmark bookmark = bookmarkRepo.findOne(bookmarkId);
@@ -43,12 +45,12 @@ public class BookmarkContoller {
     }
 
     @PostMapping
-    public @ResponseBody Result addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
+    @ResponseBody
+    public Result addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
         this.validateUser(username);
 
-        Object result = this.accountRepo.findByUsername(username).map(account -> {
-            Bookmark bookmark = bookmarkRepo.save(new Bookmark(account, input.uri, input.description));
-            return bookmark;
+        Bookmark result = this.accountRepo.findByUsername(username).map(account -> {
+            return bookmarkRepo.save(new Bookmark(account, input.uri, input.description));
         }).orElse(null);
         return new Result(1, "success", result);
     }

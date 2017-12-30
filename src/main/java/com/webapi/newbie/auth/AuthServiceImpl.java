@@ -6,7 +6,6 @@ import com.webapi.newbie.model.Account;
 import com.webapi.newbie.model.AccountRole;
 import com.webapi.newbie.model.JwtUser;
 import com.webapi.newbie.repo.AccountRepo;
-import com.webapi.newbie.repo.AccountRoleRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         account.password = encoder.encode(account.password);
         account.lastPasswordResetDate = new Date();
 
-        AccountRole accountRole = new AccountRole(account, "USER");
+        AccountRole accountRole = new AccountRole(account, "ROLE_USER");
         account.roles.add(accountRole);
 
         Account savedAccount = accountRepo.save(account);

@@ -21,14 +21,16 @@ public class UserController {
     private AccountRepo accountRepo;
 
     @GetMapping
-    public @ResponseBody Result getAccountList() {
+    @ResponseBody
+    public Result getAccountList() {
         Iterable<Account> accounts = accountRepo.findAll();
         return new Result(1, "success", accounts);
     }
 
     @GetMapping(path = "/{username}")
-    public @ResponseBody Result getAccount(@PathVariable String username) {
-        Object account = accountRepo.findByUsername(username).orElse(null);
+    @ResponseBody
+    public Result getAccount(@PathVariable String username) {
+        Account account = accountRepo.findByUsername(username).orElse(null);
         return new Result(1, "success", account);
     }
 

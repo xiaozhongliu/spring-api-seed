@@ -23,8 +23,8 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
         if (account.isPresent()) {
             return JwtUserFactory.create(account.get());
-        } else {
-            throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         }
+
+        throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
     }
 }
