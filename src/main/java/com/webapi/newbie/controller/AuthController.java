@@ -3,8 +3,8 @@ package com.webapi.newbie.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.webapi.newbie.auth.AuthService;
-import com.webapi.newbie.auth.JwtAuthResponse;
 import com.webapi.newbie.entity.Account;
+import com.webapi.newbie.model.AuthResponse;
 import com.webapi.newbie.model.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class AuthController {
     @ResponseBody
     public Result login(@RequestBody Account account) throws AuthenticationException {
         String token = authService.login(account.username, account.password);
-        return new Result(1, "success", new JwtAuthResponse(token));
+        return new Result(1, "success", new AuthResponse(token));
     }
 
     @GetMapping(path = "${jwt.route.auth.refresh}")
@@ -55,7 +55,7 @@ public class AuthController {
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body("no need to refresh");
         }
-        return ResponseEntity.ok(new Result(1, "success", new JwtAuthResponse(refreshedToken)));
+        return ResponseEntity.ok(new Result(1, "success", new AuthResponse(refreshedToken)));
     }
 
 }

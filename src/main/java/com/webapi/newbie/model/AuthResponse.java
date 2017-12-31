@@ -1,14 +1,14 @@
-package com.webapi.newbie.auth;
+package com.webapi.newbie.model;
 
 import java.io.Serializable;
 
-public class JwtAuthResponse implements Serializable {
+public class AuthResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     public String token;
 
-    public JwtAuthResponse(String token) {
+    public AuthResponse(String token) {
         this.token = token;
     }
 }

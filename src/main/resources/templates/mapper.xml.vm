@@ -3,12 +3,12 @@
 <mapper namespace="${package.Mapper}.${table.mapperName}">
 
 #if(${enableCache})
-    <!-- 开启二级缓存 -->
+    <!-- open second level cache -->
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
 #end
 #if(${baseResultMap})
-    <!-- 通用查询映射结果 -->
+    <!-- common result map -->
     <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
 #foreach($field in ${table.fields})
 #if(${field.keyFlag})##生成主键排在第一位
@@ -27,7 +27,7 @@
 
 #end
 #if(${baseColumnList})
-    <!-- 通用查询结果列 -->
+    <!-- common result columns -->
     <sql id="Base_Column_List">
 #foreach($field in ${table.commonFields})
     #if(${field.name} == ${field.propertyName})${field.name}#else${field.name} AS ${field.propertyName}#end,

@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webapi.newbie.mapper.AccountDao">
 
-    <!-- 通用查询映射结果 -->
+    <!-- open second level cache -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- common result map -->
     <resultMap id="BaseResultMap" type="com.webapi.newbie.entity.Account">
         <id column="id" property="id" />
         <result column="last_password_reset_date" property="lastPasswordResetDate" />
@@ -10,7 +13,7 @@
         <result column="username" property="username" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
+    <!-- common result columns -->
     <sql id="Base_Column_List">
         id, last_password_reset_date, password, username
     </sql>

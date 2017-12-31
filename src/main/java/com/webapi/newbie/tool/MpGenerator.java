@@ -19,40 +19,41 @@ public class MpGenerator {
     }
 
     private static void generateByTables(String packageName, String... tableNames){
+
+        GlobalConfig config = new GlobalConfig();
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         StrategyConfig strategyConfig = new StrategyConfig();
         TemplateConfig tplConfig = new TemplateConfig();
-        GlobalConfig config = new GlobalConfig();
 
-        dataSourceConfig.setDbType(DbType.MYSQL)
-                .setUrl("jdbc:mysql://120.55.240.107:3306/test")
-                .setUsername("liuxiaozhong")
-                .setPassword("JbKRTggMsuFOwPsJPjZK")
-                .setDriverName("com.mysql.jdbc.Driver");
-        strategyConfig
-                .setCapitalMode(true)
-                .setEntityLombokModel(true)
-                .setDbColumnUnderline(true)
-                .setNaming(NamingStrategy.underline_to_camel)
-                .setInclude(tableNames);
         config.setActiveRecord(false)
-                .setAuthor("xiaozhong")
-                .setOutputDir("./src/main/java/")
-                .setMapperName("%sDao")
-                .setBaseResultMap(true)
-                .setBaseColumnList(true)
-                .setEnableCache(false)
-                .setFileOverride(false);
+            .setAuthor("xiaozhong")
+            .setOutputDir("./src/main/java/")
+            .setFileOverride(false)
+            .setEnableCache(true)
+            .setBaseResultMap(true)
+            .setBaseColumnList(true)
+            .setMapperName("%sDao");
+        dataSourceConfig.setDbType(DbType.MYSQL)
+            .setUrl("jdbc:mysql://120.55.240.107:3306/test")
+            .setUsername("liuxiaozhong")
+            .setPassword("JbKRTggMsuFOwPsJPjZK")
+            .setDriverName("com.mysql.jdbc.Driver");
+        strategyConfig
+            .setCapitalMode(true)
+            .setEntityLombokModel(true)
+            .setDbColumnUnderline(true)
+            .setNaming(NamingStrategy.underline_to_camel)
+            .setInclude(tableNames);
         new AutoGenerator().setGlobalConfig(config)
-                .setDataSource(dataSourceConfig)
-                .setStrategy(strategyConfig)
-                .setTemplate(tplConfig)
-                .setPackageInfo(
-                        new PackageConfig()
-                                .setParent(packageName)
-                                .setController("controller")
-                                .setEntity("entity")
-                ).execute();
+            .setDataSource(dataSourceConfig)
+            .setStrategy(strategyConfig)
+            .setTemplate(tplConfig)
+            .setPackageInfo(
+                new PackageConfig()
+                    .setParent(packageName)
+                    .setController("controller")
+                    .setEntity("entity")
+            ).execute();
     }
 
 }
