@@ -1,15 +1,14 @@
 package com.webapi.seed.auth;
 
+import com.webapi.seed.domain.JwtUser;
+import com.webapi.seed.entity.Account;
+import com.webapi.seed.entity.AccountRole;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.webapi.seed.entity.Account;
-import com.webapi.seed.entity.AccountRole;
-import com.webapi.seed.domain.JwtUser;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class JwtUserFactory {
 

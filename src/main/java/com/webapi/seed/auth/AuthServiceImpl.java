@@ -1,13 +1,10 @@
 package com.webapi.seed.auth;
 
-import java.util.Date;
-
 import com.webapi.seed.domain.JwtUser;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.AccountRole;
 import com.webapi.seed.service.IAccountRoleService;
 import com.webapi.seed.service.IAccountService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class AuthServiceImpl implements IAuthService {
@@ -32,8 +31,13 @@ public class AuthServiceImpl implements IAuthService {
     private String tokenHead;
 
     @Autowired
-    public AuthServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
-            JwtTokenUtil jwtTokenUtil, IAccountService accountService, IAccountRoleService accountRoleService) {
+    public AuthServiceImpl(
+            AuthenticationManager authenticationManager,
+            UserDetailsService userDetailsService,
+            JwtTokenUtil jwtTokenUtil,
+            IAccountService accountService,
+            IAccountRoleService accountRoleService
+    ) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
@@ -66,8 +70,7 @@ public class AuthServiceImpl implements IAuthService {
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        return token;
+        return jwtTokenUtil.generateToken(userDetails);
     }
 
     @Override

@@ -1,22 +1,17 @@
 package com.webapi.seed.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.webapi.seed.auth.IAuthService;
-import com.webapi.seed.entity.Account;
 import com.webapi.seed.domain.AuthResponse;
 import com.webapi.seed.domain.Result;
-
+import com.webapi.seed.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author xiaozhong

@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.webapi.seed.dao.AccountDao;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.service.IAccountService;
-
 import org.springframework.stereotype.Service;
 
 /**

@@ -1,9 +1,5 @@
 package com.webapi.seed.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.webapi.seed.dao.AccountRoleDao;
@@ -11,8 +7,10 @@ import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.AccountRole;
 import com.webapi.seed.service.IAccountRoleService;
 import com.webapi.seed.service.IAccountService;
-
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author xiaozhong

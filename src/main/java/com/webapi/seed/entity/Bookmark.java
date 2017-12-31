@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,7 +13,6 @@ import lombok.experimental.Accessors;
  * @since 2017-12-31
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class Bookmark implements Serializable {
 

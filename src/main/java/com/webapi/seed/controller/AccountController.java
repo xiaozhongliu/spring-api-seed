@@ -3,7 +3,6 @@ package com.webapi.seed.controller;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.service.IAccountService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

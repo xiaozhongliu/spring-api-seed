@@ -1,9 +1,9 @@
 package com.webapi.seed.service;
 
-import java.util.List;
-
 import com.baomidou.mybatisplus.service.IService;
 import com.webapi.seed.entity.AccountRole;
+
+import java.util.List;
 
 /**
  * @author xiaozhong

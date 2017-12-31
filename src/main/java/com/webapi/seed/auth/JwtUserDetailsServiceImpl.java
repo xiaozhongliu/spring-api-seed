@@ -1,17 +1,16 @@
 package com.webapi.seed.auth;
 
-import java.util.List;
-
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.AccountRole;
 import com.webapi.seed.service.IAccountRoleService;
 import com.webapi.seed.service.IAccountService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {

@@ -2,7 +2,6 @@ package com.webapi.seed.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.webapi.seed.entity.Bookmark;
-
 import org.apache.ibatis.annotations.Mapper;
 
 /**
