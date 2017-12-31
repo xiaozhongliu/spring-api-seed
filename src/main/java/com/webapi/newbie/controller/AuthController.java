@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.webapi.newbie.auth.AuthService;
 import com.webapi.newbie.entity.Account;
-import com.webapi.newbie.model.AuthResponse;
-import com.webapi.newbie.model.Result;
+import com.webapi.newbie.domain.AuthResponse;
+import com.webapi.newbie.domain.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

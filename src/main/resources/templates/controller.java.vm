@@ -1,8 +1,5 @@
 package ${package.Controller};
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
@@ -11,6 +8,7 @@ import org.springframework.stereotype.Controller;
 #if(${superControllerClassPackage})
 import ${superControllerClassPackage};
 #end
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author ${author}
@@ -33,5 +31,4 @@ public class ${table.controllerName} {
 #end
 
 }
-
 #end

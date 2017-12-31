@@ -1,7 +1,7 @@
 package com.webapi.newbie.controller;
 
 import com.webapi.newbie.entity.Account;
-import com.webapi.newbie.model.Result;
+import com.webapi.newbie.domain.Result;
 import com.webapi.newbie.service.impl.AccountServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;

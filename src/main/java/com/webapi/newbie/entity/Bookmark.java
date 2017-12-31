@@ -1,8 +1,9 @@
 package com.webapi.newbie.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author xiaozhong
- * @since 2017-12-30
+ * @since 2017-12-31
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,13 +26,13 @@ public class Bookmark implements Serializable {
     public String uri;
     public Long accountId;
 
-    public Bookmark() {
-    }
-
     public Bookmark(Long accountId, String description, String uri) {
         this.accountId = accountId;
         this.description = description;
         this.uri = uri;
+    }
+
+    public Bookmark() {
     }
 
 }

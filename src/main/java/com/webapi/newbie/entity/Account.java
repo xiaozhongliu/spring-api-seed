@@ -1,9 +1,10 @@
 package com.webapi.newbie.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author xiaozhong
- * @since 2017-12-30
+ * @since 2017-12-31
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

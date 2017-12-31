@@ -1,7 +1,7 @@
 package com.webapi.newbie.service;
 
-import com.webapi.newbie.entity.Bookmark;
 import com.baomidou.mybatisplus.service.IService;
+import com.webapi.newbie.entity.Bookmark;
 
 /**
  * @author xiaozhong

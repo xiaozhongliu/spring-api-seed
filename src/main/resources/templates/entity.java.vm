@@ -2,7 +2,6 @@ package ${package.Entity};
 
 #if(${activeRecord})
 import java.io.Serializable;
-
 #end
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
@@ -49,7 +48,7 @@ public class ${entity} implements Serializable {
 #if(${field.keyFlag})
 ## 主键
 #if(${field.keyIdentityFlag})
-	@TableId(value="${field.name}", type= IdType.AUTO)
+	@TableId(value = "${field.name}", type = IdType.AUTO)
 #elseif(${field.convert})
 	@TableId("${field.name}")
 #end
@@ -68,7 +67,7 @@ public class ${entity} implements Serializable {
 #if(${logicDeleteFieldName}==${field.name})
 	@TableLogic
 #end
-	private ${field.propertyType} ${field.propertyName};
+	public ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
 
@@ -128,4 +127,7 @@ public class ${entity} implements Serializable {
 		"}";
 	}
 #end
+    public ${entity}(){
+    }
+
 }

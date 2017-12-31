@@ -1,7 +1,7 @@
 package com.webapi.newbie.dao;
 
-import com.webapi.newbie.entity.Bookmark;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.webapi.newbie.entity.Bookmark;
 
 import org.apache.ibatis.annotations.Mapper;
 

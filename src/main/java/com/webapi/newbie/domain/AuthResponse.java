@@ -1,4 +1,4 @@
-package com.webapi.newbie.model;
+package com.webapi.newbie.domain;
 
 import java.io.Serializable;
 

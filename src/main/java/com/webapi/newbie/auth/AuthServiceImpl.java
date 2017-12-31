@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
-import com.webapi.newbie.model.JwtUser;
+import com.webapi.newbie.domain.JwtUser;
 import com.webapi.newbie.service.impl.AccountRoleServiceImpl;
 import com.webapi.newbie.service.impl.AccountServiceImpl;
 

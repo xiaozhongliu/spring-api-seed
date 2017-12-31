@@ -1,9 +1,7 @@
 package com.webapi.newbie.controller;
 
-
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author xiaozhong
@@ -14,4 +12,3 @@ import org.springframework.stereotype.Controller;
 public class AccountRoleController {
 
 }
-

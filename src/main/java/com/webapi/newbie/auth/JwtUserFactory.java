@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
-import com.webapi.newbie.model.JwtUser;
+import com.webapi.newbie.domain.JwtUser;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
