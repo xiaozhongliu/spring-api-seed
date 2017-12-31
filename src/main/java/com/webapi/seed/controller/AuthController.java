@@ -1,11 +1,11 @@
 package com.webapi.seed.controller;
 
 import com.webapi.seed.auth.IAuthService;
+import com.webapi.seed.config.JwtProps;
 import com.webapi.seed.domain.AuthResponse;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Value("${jwt.header}")
-    private String tokenHeader;
+    @Autowired
+    private JwtProps jwtProps;
 
     @Autowired
     private IAuthService authService;
@@ -45,7 +45,7 @@ public class AuthController {
 
     @GetMapping(path = "${jwt.route.auth.refresh}")
     public ResponseEntity<?> refreshAndGetAuthToken(HttpServletRequest request) throws AuthenticationException {
-        String token = request.getHeader(tokenHeader);
+        String token = request.getHeader(jwtProps.getHeader());
         String refreshedToken = authService.refresh(token);
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body("no need to refresh");

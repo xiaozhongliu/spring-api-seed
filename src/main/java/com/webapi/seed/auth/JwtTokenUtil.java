@@ -1,10 +1,11 @@
 package com.webapi.seed.auth;
 
+import com.webapi.seed.config.JwtProps;
 import com.webapi.seed.domain.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -18,11 +19,8 @@ public class JwtTokenUtil {
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
 
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.expiration}")
-    private String expiration;
+    @Autowired
+    private JwtProps jwtProps;
 
     public String getUsernameFromToken(String token) {
         String username;
@@ -60,7 +58,7 @@ public class JwtTokenUtil {
     private Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
-            claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            claims = Jwts.parser().setSigningKey(jwtProps.getSecret()).parseClaimsJws(token).getBody();
         } catch (Exception e) {
             claims = null;
         }
@@ -68,7 +66,7 @@ public class JwtTokenUtil {
     }
 
     private Date generateExpirationDate() {
-        Long exp = Long.parseLong(expiration);
+        Long exp = jwtProps.getExpiration();
         return new Date(System.currentTimeMillis() + exp * 1000);
     }
 
@@ -90,7 +88,7 @@ public class JwtTokenUtil {
 
     String generateToken(Map<String, Object> claims) {
         return Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, jwtProps.getSecret()).compact();
     }
 
     public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {

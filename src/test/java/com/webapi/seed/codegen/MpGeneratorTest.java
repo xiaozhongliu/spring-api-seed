@@ -1,4 +1,4 @@
-package com.webapi.seed.tool;
+package com.webapi.seed.codegen;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -6,6 +6,15 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.webapi.seed.Application;
+import com.webapi.seed.config.PackageProps;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +25,27 @@ import java.util.List;
  * @author xiaozhong
  * @since 2017-12-30
  */
-public class MpGenerator {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+@WebAppConfiguration
+public class MpGeneratorTest {
 
-    public static void main(String[] args) {
-        generateByTables("com.webapi.seed", "account", "account_role", "bookmark");
+    @Autowired
+    private PackageProps packProps;
+    @Autowired
+    private DataSourceProperties dsProps;
+
+    @Test
+    public void generate() {
+        generateInner(
+                packProps.getName(),
+                "account",
+                "account_role",
+                "bookmark"
+        );
     }
 
-    private static void generateByTables(String packageName, String... tableNames) {
+    private void generateInner(String packageName, String... tableNames) {
 
         GlobalConfig config = new GlobalConfig();
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
@@ -35,8 +58,8 @@ public class MpGenerator {
             }
         };
 
-        config.setAuthor("xiaozhong")
-                .setOutputDir("./src/main/java/")
+        config.setAuthor(packProps.getAuthor())
+                .setOutputDir(packProps.getRootPath())
                 .setFileOverride(false)
                 .setEnableCache(true)
                 .setActiveRecord(false)
@@ -44,10 +67,10 @@ public class MpGenerator {
                 .setBaseColumnList(true)
                 .setMapperName("%sDao");
         dataSourceConfig.setDbType(DbType.MYSQL)
-                .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://120.55.240.107:3306/test")
-                .setUsername("liuxiaozhong")
-                .setPassword("JbKRTggMsuFOwPsJPjZK");
+                .setDriverName(dsProps.getDriverClassName())
+                .setUrl(dsProps.getUrl())
+                .setUsername(dsProps.getUsername())
+                .setPassword(dsProps.getPassword());
         strategyConfig.setInclude(tableNames)
                 .setCapitalMode(true)
                 .setEntityLombokModel(true)
@@ -62,11 +85,11 @@ public class MpGenerator {
         tplConfig.setMapper(null).setXml(null);
 
         // customize out dir of generated files
-        List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
+        List<FileOutConfig> focList = new ArrayList<>();
         focList.add(new FileOutConfig("/templates/mapper.java.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return String.format("./src/main/java/com/webapi/seed/dao/%sDao.java", tableInfo.getEntityName());
+                return String.format("%s/com/webapi/seed/dao/%sDao.java", packProps.getRootPath(), tableInfo.getEntityName());
             }
         });
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {

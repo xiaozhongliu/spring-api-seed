@@ -3,10 +3,13 @@ server:
   port: 8080
 package:
   name: com.webapi.seed
+  author: xiaozhong
+  rootPath: ./src/main/java
 
 # spring
 spring:
   datasource:
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://fake:3306/test
     username: liuxiaozhong
     password: JbKRTggMsuFOwPsJPjZK
@@ -19,9 +22,9 @@ jwt:
   tokenHead: "Bearer "
   route:
     auth:
-      path: "/login"
-      refresh: "/refresh"
-      register: "/register"
+      path: /login
+      refresh: /refresh
+      register: /register
 
 # mybatis
 mybatis-plus:

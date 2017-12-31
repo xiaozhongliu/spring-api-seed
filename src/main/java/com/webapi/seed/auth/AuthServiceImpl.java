@@ -1,12 +1,12 @@
 package com.webapi.seed.auth;
 
+import com.webapi.seed.config.JwtProps;
 import com.webapi.seed.domain.JwtUser;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.AccountRole;
 import com.webapi.seed.service.IAccountRoleService;
 import com.webapi.seed.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,14 +21,14 @@ import java.util.Date;
 @Service
 public class AuthServiceImpl implements IAuthService {
 
+    @Autowired
+    private JwtProps jwtProps;
+
     private AuthenticationManager authenticationManager;
     private UserDetailsService userDetailsService;
     private JwtTokenUtil jwtTokenUtil;
     private IAccountService accountService;
     private IAccountRoleService accountRoleService;
-
-    @Value("${jwt.tokenHead}")
-    private String tokenHead;
 
     @Autowired
     public AuthServiceImpl(
@@ -75,7 +75,7 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public String refresh(String oldToken) {
-        final String token = oldToken.substring(tokenHead.length());
+        final String token = oldToken.substring(jwtProps.getTokenHead().length());
         String username = jwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
         if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {

@@ -21,16 +21,6 @@
             "request": "attach",
             "hostName": "localhost",
             "port": 0
-        },
-        {
-            "type": "java",
-            "name": "Mp Generator",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "stopOnEntry": false,
-            "mainClass": "com.webapi.seed.tool.MpGenerator",
-            "args": ""
         }
     ]
 }

@@ -20,7 +20,7 @@ import java.util.List;
 public class BookmarkServiceImpl extends ServiceImpl<BookmarkDao, Bookmark> implements IBookmarkService {
 
     @Resource
-    IAccountService accountService;
+    private IAccountService accountService;
 
     @Override
     public Bookmark selectById(Long bookmarkId) {

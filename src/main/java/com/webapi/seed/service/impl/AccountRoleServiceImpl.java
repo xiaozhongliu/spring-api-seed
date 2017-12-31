@@ -20,13 +20,13 @@ import java.util.List;
 public class AccountRoleServiceImpl extends ServiceImpl<AccountRoleDao, AccountRole> implements IAccountRoleService {
 
     @Resource
-    IAccountService accountService;
+    private IAccountService accountService;
 
     @Override
     public List<AccountRole> selectByUsername(String username) {
         Account account = accountService.selectByUsername(username);
         AccountRole role = new AccountRole(account.id, null);
-        return baseMapper.selectList(new EntityWrapper<AccountRole>(role));
+        return baseMapper.selectList(new EntityWrapper<>(role));
     }
 
 }
