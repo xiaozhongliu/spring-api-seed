@@ -16,7 +16,9 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
- * Mabatis Plus Code Generator
+ * Mybatis Plus Code Generator
+ * @author xiaozhong
+ * @since 2017-12-30
  */
 public class MpGenerator {
 

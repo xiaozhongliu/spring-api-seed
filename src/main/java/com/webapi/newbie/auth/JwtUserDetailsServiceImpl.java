@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
-import com.webapi.newbie.service.impl.AccountRoleServiceImpl;
-import com.webapi.newbie.service.impl.AccountServiceImpl;
+import com.webapi.newbie.service.IAccountRoleService;
+import com.webapi.newbie.service.IAccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private AccountServiceImpl accountService;
+    private IAccountService accountService;
     @Autowired
-    private AccountRoleServiceImpl accountRoleService;
+    private IAccountRoleService accountRoleService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

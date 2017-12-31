@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.webapi.newbie.dao.BookmarkDao;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.Bookmark;
+import com.webapi.newbie.service.IAccountService;
 import com.webapi.newbie.service.IBookmarkService;
 
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class BookmarkServiceImpl extends ServiceImpl<BookmarkDao, Bookmark> implements IBookmarkService {
 
     @Resource
-    AccountServiceImpl accountService;
+    IAccountService accountService;
 
     @Override
     public Bookmark selectById(Long bookmarkId) {

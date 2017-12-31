@@ -2,7 +2,7 @@ package com.webapi.newbie.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.webapi.newbie.auth.AuthService;
+import com.webapi.newbie.auth.IAuthService;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.domain.AuthResponse;
 import com.webapi.newbie.domain.Result;
@@ -30,7 +30,7 @@ public class AuthController {
     private String tokenHeader;
 
     @Autowired
-    private AuthService authService;
+    private IAuthService authService;
 
     @PostMapping(path = "${jwt.route.auth.register}")
     public ResponseEntity<?> register(@RequestBody Account account) throws AuthenticationException {

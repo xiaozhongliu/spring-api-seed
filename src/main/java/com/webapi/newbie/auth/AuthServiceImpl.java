@@ -2,11 +2,11 @@ package com.webapi.newbie.auth;
 
 import java.util.Date;
 
+import com.webapi.newbie.domain.JwtUser;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
-import com.webapi.newbie.domain.JwtUser;
-import com.webapi.newbie.service.impl.AccountRoleServiceImpl;
-import com.webapi.newbie.service.impl.AccountServiceImpl;
+import com.webapi.newbie.service.IAccountRoleService;
+import com.webapi.newbie.service.IAccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,20 +20,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements IAuthService {
 
     private AuthenticationManager authenticationManager;
     private UserDetailsService userDetailsService;
     private JwtTokenUtil jwtTokenUtil;
-    private AccountServiceImpl accountService;
-    private AccountRoleServiceImpl accountRoleService;
+    private IAccountService accountService;
+    private IAccountRoleService accountRoleService;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
     @Autowired
     public AuthServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService,
-            JwtTokenUtil jwtTokenUtil, AccountServiceImpl accountService, AccountRoleServiceImpl accountRoleService) {
+            JwtTokenUtil jwtTokenUtil, IAccountService accountService, IAccountRoleService accountRoleService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;

@@ -1,10 +1,10 @@
 package com.webapi.newbie.controller;
 
+import com.webapi.newbie.domain.Result;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.Bookmark;
-import com.webapi.newbie.domain.Result;
-import com.webapi.newbie.service.impl.AccountServiceImpl;
-import com.webapi.newbie.service.impl.BookmarkServiceImpl;
+import com.webapi.newbie.service.IAccountService;
+import com.webapi.newbie.service.IBookmarkService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BookmarkController {
 
     @Autowired
-    private BookmarkServiceImpl bookmarkService;
+    private IBookmarkService bookmarkService;
     @Autowired
-    private AccountServiceImpl accountService;
+    private IAccountService accountService;
 
     @GetMapping
     @ResponseBody

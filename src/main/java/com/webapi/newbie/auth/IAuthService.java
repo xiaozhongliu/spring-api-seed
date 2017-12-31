@@ -2,7 +2,7 @@ package com.webapi.newbie.auth;
 
 import com.webapi.newbie.entity.Account;
 
-public interface AuthService {
+public interface IAuthService {
 
     boolean register(Account account);
 

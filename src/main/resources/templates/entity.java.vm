@@ -6,8 +6,8 @@ import java.io.Serializable;
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-#if(${entityLombokModel})
 
+#if(${entityLombokModel})
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -95,7 +95,6 @@ public class ${entity} implements Serializable {
 	}
 #end
 #end
-
 #if(${entityColumnConstant})
 #foreach($field in ${table.fields})
 	public static final String ${field.name.toUpperCase()} = "${field.name}";
@@ -127,7 +126,7 @@ public class ${entity} implements Serializable {
 		"}";
 	}
 #end
-    public ${entity}(){
+    public ${entity}() {
     }
 
 }

@@ -10,6 +10,7 @@ import com.webapi.newbie.dao.AccountRoleDao;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
 import com.webapi.newbie.service.IAccountRoleService;
+import com.webapi.newbie.service.IAccountService;
 
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 public class AccountRoleServiceImpl extends ServiceImpl<AccountRoleDao, AccountRole> implements IAccountRoleService {
 
     @Resource
-    AccountServiceImpl accountService;
+    IAccountService accountService;
 
     @Override
     public List<AccountRole> selectByUsername(String username) {

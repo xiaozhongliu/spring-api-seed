@@ -1,8 +1,8 @@
 package com.webapi.newbie.controller;
 
-import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.domain.Result;
-import com.webapi.newbie.service.impl.AccountServiceImpl;
+import com.webapi.newbie.entity.Account;
+import com.webapi.newbie.service.IAccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AccountController {
 
     @Autowired
-    private AccountServiceImpl accountService;
+    private IAccountService accountService;
 
     @GetMapping
     @ResponseBody
