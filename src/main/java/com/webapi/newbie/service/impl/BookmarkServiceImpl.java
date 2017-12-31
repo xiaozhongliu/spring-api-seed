@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.webapi.newbie.dao.BookmarkDao;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.Bookmark;
-import com.webapi.newbie.mapper.BookmarkDao;
 import com.webapi.newbie.service.IBookmarkService;
 
 import org.springframework.stereotype.Service;

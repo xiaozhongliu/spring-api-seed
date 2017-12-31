@@ -2,8 +2,8 @@ package com.webapi.newbie.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.webapi.newbie.dao.AccountDao;
 import com.webapi.newbie.entity.Account;
-import com.webapi.newbie.mapper.AccountDao;
 import com.webapi.newbie.service.IAccountService;
 
 import org.springframework.stereotype.Service;

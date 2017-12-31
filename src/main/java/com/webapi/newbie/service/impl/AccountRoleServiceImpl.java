@@ -6,9 +6,9 @@ import javax.annotation.Resource;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.webapi.newbie.dao.AccountRoleDao;
 import com.webapi.newbie.entity.Account;
 import com.webapi.newbie.entity.AccountRole;
-import com.webapi.newbie.mapper.AccountRoleDao;
 import com.webapi.newbie.service.IAccountRoleService;
 
 import org.springframework.stereotype.Service;
