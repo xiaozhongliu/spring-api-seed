@@ -4,7 +4,7 @@ server:
 package:
   name: com.webapi.seed
   author: xiaozhong
-  rootPath: ./src/main/java
+  root-path: ./src/main/java
 
 # spring
 spring:
@@ -18,8 +18,8 @@ spring:
 jwt:
   header: Authorization
   secret: SGXgvJ92pf
-  expiration: 8640 # 100 days
-  tokenHead: "Bearer "
+  expiration: 8640  # 100 days
+  token-head: "Bearer "
   route:
     auth:
       path: /login

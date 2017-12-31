@@ -1,9 +1,11 @@
 package com.webapi.seed.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConfigurationPropertiesBinding
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProps {
 
