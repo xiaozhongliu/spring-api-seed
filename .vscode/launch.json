@@ -6,13 +6,13 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch)-Application<newbie>",
+            "name": "Debug (Launch)-Application<seed>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "com.webapi.newbie.Application",
-            "projectName": "newbie",
+            "mainClass": "com.webapi.seed.Application",
+            "projectName": "seed",
             "args": ""
         },
         {
@@ -29,7 +29,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopOnEntry": false,
-            "mainClass": "com.webapi.newbie.tool.MpGenerator",
+            "mainClass": "com.webapi.seed.tool.MpGenerator",
             "args": ""
         }
     ]
