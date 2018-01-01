@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class RequestLogger {
 
-    private static final Logger logger = LoggerFactory.getLogger("REQUEST");
+    private static final Logger logger = LoggerFactory.getLogger("LOGGER");
 
     @Pointcut("execution(public * com.webapi.seed.controller.*.*(..))")
-    public void logPointCut() {
+    public void handling() {
     }
 
-    @Before("logPointCut()")
+    @Before("handling()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -42,7 +42,7 @@ public class RequestLogger {
         }
     }
 
-    @Around("logPointCut()")
+    @Around("handling()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
 
         long startTime = System.currentTimeMillis();
@@ -51,7 +51,7 @@ public class RequestLogger {
         return result;
     }
 
-    @AfterReturning(returning = "response", pointcut = "logPointCut()")
+    @AfterReturning(returning = "response", pointcut = "handling()")
     public void doAfterReturning(ResponseEntity response) throws Throwable {
 
         logger.info(

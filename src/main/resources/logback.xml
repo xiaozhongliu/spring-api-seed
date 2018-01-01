@@ -6,7 +6,7 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%clr(%d){blue} %clr([%le] [%c{30}:%L]) %msg%n</pattern>
+            <pattern>%clr(%d{yyyy-MM-dd hh:mm:ss}){blue} %clr([%le] [%c{30}:%L]) %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -15,11 +15,22 @@
             <fileNamePattern>${application.home:-.}/log/%d{yyyyMMdd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
-            <pattern>%d - [%le] [%c{30}:%L] %msg%n</pattern>
+            <pattern>%d - [%le] %msg%n</pattern>
         </encoder>
     </appender>
 
-    <root level="info">
+    <appender name="LOGGER_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%clr(%d{yyyy-MM-dd hh:mm:ss}){blue} %clr([%le]) %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="LOGGER_CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
