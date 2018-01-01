@@ -6,6 +6,7 @@ import com.webapi.seed.entity.Bookmark;
 import com.webapi.seed.service.IAccountService;
 import com.webapi.seed.service.IBookmarkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,30 +25,30 @@ public class BookmarkController {
 
     @GetMapping
     @ResponseBody
-    public Result getBookmarkList(@PathVariable String username) {
+    public ResponseEntity getBookmarkList(@PathVariable String username) {
         this.validateUser(username);
 
         Iterable<Bookmark> bookmarks = bookmarkService.selectByUsername(username);
-        return new Result(1, "success", bookmarks);
+        return Result.Ok(bookmarks);
     }
 
     @GetMapping(path = "/{bookmarkId}")
     @ResponseBody
-    public Result getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
+    public ResponseEntity getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
         this.validateUser(username);
 
         Bookmark bookmark = bookmarkService.selectById(bookmarkId);
-        return new Result(1, "success", bookmark);
+        return Result.Ok(bookmark);
     }
 
     @PostMapping
     @ResponseBody
-    public Result addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
+    public ResponseEntity addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
         this.validateUser(username);
 
         Account account = accountService.selectByUsername(username);
         bookmarkService.insert(new Bookmark(account.id, input.uri, input.description));
-        return new Result(1, "success");
+        return Result.Ok();
     }
 
     /**

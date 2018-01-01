@@ -23,34 +23,33 @@ public class AuthController {
 
     @Autowired
     private JwtProps jwtProps;
-
     @Autowired
     private IAuthService authService;
 
     @PostMapping(path = "${jwt.route.auth.register}")
-    public ResponseEntity<?> register(@RequestBody Account account) throws AuthenticationException {
+    public ResponseEntity register(@RequestBody Account account) throws AuthenticationException {
         boolean result = authService.register(account);
         if (!result) {
             return ResponseEntity.badRequest().body("account already exists");
         }
-        return ResponseEntity.ok(new Result(1, "success"));
+        return Result.Ok();
     }
 
     @PostMapping(path = "${jwt.route.auth.path}")
     @ResponseBody
-    public Result login(@RequestBody Account account) throws AuthenticationException {
+    public ResponseEntity login(@RequestBody Account account) throws AuthenticationException {
         String token = authService.login(account.username, account.password);
-        return new Result(1, "success", new AuthResponse(token));
+        return Result.Ok(new AuthResponse(token));
     }
 
     @GetMapping(path = "${jwt.route.auth.refresh}")
-    public ResponseEntity<?> refreshAndGetAuthToken(HttpServletRequest request) throws AuthenticationException {
+    public ResponseEntity refreshAndGetAuthToken(HttpServletRequest request) throws AuthenticationException {
         String token = request.getHeader(jwtProps.getHeader());
         String refreshedToken = authService.refresh(token);
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body("no need to refresh");
         }
-        return ResponseEntity.ok(new Result(1, "success", new AuthResponse(refreshedToken)));
+        return Result.Ok(new AuthResponse(refreshedToken));
     }
 
 }

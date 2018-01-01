@@ -17,8 +17,13 @@ public class JwtUser implements UserDetails {
     private final Collection<? extends GrantedAuthority> authorities;
     private final Date lastPasswordResetDate;
 
-    public JwtUser(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities,
-                   Date lastPasswordResetDate) {
+    public JwtUser(
+            Long id,
+            String username,
+            String password,
+            Collection<? extends GrantedAuthority> authorities,
+            Date lastPasswordResetDate
+    ) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -66,7 +71,6 @@ public class JwtUser implements UserDetails {
         return true;
     }
 
-    // 这个是自定义的，返回上次密码重置日期
     @JsonIgnore
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;

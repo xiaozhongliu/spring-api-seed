@@ -1,5 +1,7 @@
 package com.webapi.seed.domain;
 
+import org.springframework.http.ResponseEntity;
+
 public class Result {
 
     public int code;
@@ -15,6 +17,14 @@ public class Result {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    public static ResponseEntity Ok() {
+        return ResponseEntity.ok(new Result(1, "success"));
+    }
+
+    public static ResponseEntity Ok(Object data) {
+        return ResponseEntity.ok(new Result(1, "success", data));
     }
 
 }

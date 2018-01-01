@@ -13,12 +13,18 @@ import java.util.stream.Collectors;
 public class JwtUserFactory {
 
     public static JwtUser create(Account account, List<AccountRole> roles) {
-        return new JwtUser(account.id, account.username, account.password, mapToGrantedAuthorities(roles),
-                account.lastPasswordResetDate);
+        return new JwtUser(
+                account.id,
+                account.username,
+                account.password,
+                mapToGrantedAuthorities(roles),
+                account.lastPasswordResetDate
+        );
     }
 
     private static Collection<GrantedAuthority> mapToGrantedAuthorities(List<AccountRole> accountRoles) {
-        return accountRoles.stream().map(accountRole -> new SimpleGrantedAuthority(accountRole.role))
+        return accountRoles.stream()
+                .map(accountRole -> new SimpleGrantedAuthority(accountRole.role))
                 .collect(Collectors.toSet());
     }
 
