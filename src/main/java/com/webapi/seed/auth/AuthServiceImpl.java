@@ -54,10 +54,9 @@ public class AuthServiceImpl implements IAuthService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         account.password = encoder.encode(account.password);
         account.lastPasswordResetDate = new Date();
+        boolean accountResult = accountService.insert(account);
 
         AccountRole accountRole = new AccountRole(account.id, "ROLE_USER");
-
-        boolean accountResult = accountService.insert(account);
         boolean accountRoleResult = accountRoleService.insert(accountRole);
 
         return accountResult && accountRoleResult;
