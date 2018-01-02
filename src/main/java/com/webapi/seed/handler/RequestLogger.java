@@ -29,15 +29,16 @@ public class RequestLogger {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
+        String method = request.getMethod();
         String path = request.getRequestURI();
         String queryString = request.getQueryString();
         if (queryString != null) {
             path = String.format("%s?%s", path, queryString);
         }
-        logger.info("START : {} {}", request.getMethod(), path);
+        logger.info("START : {} {}", method, path);
 
         Object[] argsArr = joinPoint.getArgs();
-        if (argsArr.length > 0) {
+        if (!method.equals("GET") && argsArr.length > 0) {
             logger.info("BODY  : {}", new ObjectMapper().writeValueAsString(argsArr[0]));
         }
     }

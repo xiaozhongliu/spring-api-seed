@@ -1,5 +1,6 @@
 package com.webapi.seed.controller;
 
+import com.webapi.seed.domain.BookmarkReq;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.Bookmark;
@@ -25,7 +26,7 @@ public class BookmarkController {
 
     @GetMapping
     @ResponseBody
-    public ResponseEntity getBookmarkList(@PathVariable String username) {
+    public ResponseEntity getBookmarkList(@RequestParam String username) {
         this.validateUser(username);
 
         Iterable<Bookmark> bookmarks = bookmarkService.selectByUsername(username);
@@ -34,20 +35,18 @@ public class BookmarkController {
 
     @GetMapping(path = "/{bookmarkId}")
     @ResponseBody
-    public ResponseEntity getBookmark(@PathVariable String username, @PathVariable Long bookmarkId) {
-        this.validateUser(username);
-
+    public ResponseEntity getBookmark(@PathVariable Long bookmarkId) {
         Bookmark bookmark = bookmarkService.selectById(bookmarkId);
         return Result.Ok(bookmark);
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity addBookmark(@PathVariable String username, @RequestBody Bookmark input) {
-        this.validateUser(username);
+    public ResponseEntity addBookmark(@RequestBody BookmarkReq bookmark) {
+        this.validateUser(bookmark.username);
 
-        Account account = accountService.selectByUsername(username);
-        bookmarkService.insert(new Bookmark(account.id, input.uri, input.description));
+        Account account = accountService.selectByUsername(bookmark.username);
+        bookmarkService.insert(new Bookmark(account.accountId, bookmark.uri, bookmark.description));
         return Result.Ok();
     }
 

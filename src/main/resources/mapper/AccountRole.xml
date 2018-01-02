@@ -7,14 +7,21 @@
 
     <!-- common result map -->
     <resultMap id="BaseResultMap" type="com.webapi.seed.entity.AccountRole">
-        <id column="id" property="id" />
-        <result column="role" property="role" />
-        <result column="account_id" property="accountId" />
+        <id column="account_role_id" property="accountRoleId"/>
+        <result column="role" property="role"/>
+        <result column="account_id" property="accountId"/>
     </resultMap>
 
     <!-- common result columns -->
     <sql id="Base_Column_List">
-        id, role, account_id
+        account_role_id, role, account_id
     </sql>
+
+    <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+        SELECT ar.*
+        FROM account a
+            JOIN account_role ar ON a.account_id = ar.account_id
+        WHERE a.username = #{username};
+    </select>
 
 </mapper>

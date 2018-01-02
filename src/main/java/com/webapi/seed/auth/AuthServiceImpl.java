@@ -56,7 +56,7 @@ public class AuthServiceImpl implements IAuthService {
         account.lastPasswordResetDate = new Date();
         boolean accountResult = accountService.insert(account);
 
-        AccountRole accountRole = new AccountRole(account.id, "ROLE_USER");
+        AccountRole accountRole = new AccountRole(account.accountId, "ROLE_USER");
         boolean accountRoleResult = accountRoleService.insert(accountRole);
 
         return accountResult && accountRoleResult;

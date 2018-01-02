@@ -2,7 +2,7 @@ package com.webapi.seed.controller;
 
 import com.webapi.seed.auth.IAuthService;
 import com.webapi.seed.config.JwtProps;
-import com.webapi.seed.domain.AuthResponse;
+import com.webapi.seed.domain.AuthRes;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class AuthController {
     @ResponseBody
     public ResponseEntity login(@RequestBody Account account) throws AuthenticationException {
         String token = authService.login(account.username, account.password);
-        return Result.Ok(new AuthResponse(token));
+        return Result.Ok(new AuthRes(token));
     }
 
     @GetMapping(path = "${jwt.route.auth.refresh}")
@@ -49,7 +49,7 @@ public class AuthController {
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body("no need to refresh");
         }
-        return Result.Ok(new AuthResponse(refreshedToken));
+        return Result.Ok(new AuthRes(refreshedToken));
     }
 
 }

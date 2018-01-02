@@ -11,4 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AccountDao extends BaseMapper<Account> {
 
+    Account selectByUsername(String username);
+
 }

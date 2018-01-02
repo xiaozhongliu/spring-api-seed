@@ -7,15 +7,22 @@
 
     <!-- common result map -->
     <resultMap id="BaseResultMap" type="com.webapi.seed.entity.Bookmark">
-        <id column="id" property="id" />
-        <result column="description" property="description" />
-        <result column="uri" property="uri" />
-        <result column="account_id" property="accountId" />
+        <id column="bookmark_id" property="bookmarkId"/>
+        <result column="description" property="description"/>
+        <result column="uri" property="uri"/>
+        <result column="account_id" property="accountId"/>
     </resultMap>
 
     <!-- common result columns -->
     <sql id="Base_Column_List">
-        id, description, uri, account_id
+        bookmark_id, description, uri, account_id
     </sql>
+
+    <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+        SELECT b.*
+        FROM account a
+            JOIN bookmark b ON a.account_id = b.account_id
+        WHERE a.username = #{username};
+    </select>
 
 </mapper>

@@ -9,21 +9,19 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author xiaozhong
- * @since 2017-12-30
+ * @since 2018-01-02
  */
 @Service
 public class AccountServiceImpl extends ServiceImpl<AccountDao, Account> implements IAccountService {
 
     @Override
     public Iterable<Account> selectAll() {
-        return baseMapper.selectList(new EntityWrapper<Account>());
+        return baseMapper.selectList(new EntityWrapper<>());
     }
 
     @Override
     public Account selectByUsername(String username) {
-        Account entity = new Account();
-        entity.username = username;
-        return baseMapper.selectOne(new EntityWrapper<Account>(entity).getEntity());
+        return baseMapper.selectByUsername(username);
     }
 
 }

@@ -14,7 +14,7 @@ public class JwtUserFactory {
 
     public static JwtUser create(Account account, List<AccountRole> roles) {
         return new JwtUser(
-                account.id,
+                account.accountId,
                 account.username,
                 account.password,
                 mapToGrantedAuthorities(roles),

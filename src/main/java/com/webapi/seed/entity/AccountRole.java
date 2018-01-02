@@ -8,10 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
-
 /**
  * @author xiaozhong
- * @since 2018-01-01
+ * @since 2018-01-02
  */
 @Data
 @Accessors(chain = true)
@@ -20,8 +19,8 @@ public class AccountRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    public Long id;
+    @TableId(value = "account_role_id", type = IdType.AUTO)
+    public Long accountRoleId;
     public String role;
     public Long accountId;
 

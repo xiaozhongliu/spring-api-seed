@@ -7,15 +7,27 @@
 
     <!-- common result map -->
     <resultMap id="BaseResultMap" type="com.webapi.seed.entity.Account">
-        <id column="id" property="id" />
-        <result column="last_password_reset_date" property="lastPasswordResetDate" />
-        <result column="password" property="password" />
-        <result column="username" property="username" />
+        <id column="account_id" property="accountId"/>
+        <result column="last_password_reset_date" property="lastPasswordResetDate"/>
+        <result column="password" property="password"/>
+        <result column="username" property="username"/>
+        <collection property="roles" ofType="String">
+            <result column="role" property="role"/>
+        </collection>
     </resultMap>
 
     <!-- common result columns -->
     <sql id="Base_Column_List">
-        id, last_password_reset_date, password, username
+        account_id, last_password_reset_date, password, username
     </sql>
+
+    <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+            a.*,
+            ar.role
+        FROM account a
+            JOIN account_role ar ON a.account_id = ar.account_id
+        WHERE a.username = #{username};
+    </select>
 
 </mapper>

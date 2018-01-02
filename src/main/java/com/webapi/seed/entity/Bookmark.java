@@ -8,10 +8,9 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
-
 /**
  * @author xiaozhong
- * @since 2018-01-01
+ * @since 2018-01-02
  */
 @Data
 @Accessors(chain = true)
@@ -20,8 +19,8 @@ public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    public Long id;
+    @TableId(value = "bookmark_id", type = IdType.AUTO)
+    public Long bookmarkId;
     public String description;
     public String uri;
     public Long accountId;
