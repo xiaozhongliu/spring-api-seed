@@ -1,5 +1,6 @@
 package com.webapi.seed.controller;
 
+import com.webapi.seed.controller.base.BaseController;
 import com.webapi.seed.domain.BookmarkReq;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
@@ -11,13 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @author xiaozhong
  * @since 2017-12-30
  */
 @Controller
 @RequestMapping("/bookmark")
-public class BookmarkController {
+public class BookmarkController extends BaseController {
 
     @Autowired
     private IBookmarkService bookmarkService;
@@ -42,10 +45,8 @@ public class BookmarkController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity addBookmark(@RequestBody BookmarkReq bookmark) {
-        this.validateUser(bookmark.username);
-
-        Account account = accountService.selectByUsername(bookmark.username);
+    public ResponseEntity addBookmark(@Valid @RequestBody BookmarkReq bookmark) {
+        Account account = this.validateUser(bookmark.username);
         bookmarkService.insert(new Bookmark(account.accountId, bookmark.uri, bookmark.description));
         return Result.Ok();
     }
@@ -53,8 +54,8 @@ public class BookmarkController {
     /**
      * private helpers
      */
-    private void validateUser(String username) {
-        accountService.selectByUsername(username);
+    private Account validateUser(String username) {
+        return accountService.selectByUsername(username);
     }
 
 }

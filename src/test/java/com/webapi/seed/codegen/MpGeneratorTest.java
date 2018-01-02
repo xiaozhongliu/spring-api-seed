@@ -75,7 +75,8 @@ public class MpGeneratorTest {
                 .setCapitalMode(true)
                 .setEntityLombokModel(true)
                 .setDbColumnUnderline(true)
-                .setNaming(NamingStrategy.underline_to_camel);
+                .setNaming(NamingStrategy.underline_to_camel)
+                .setSuperControllerClass(packProps.getBaseController());
         packConfig.setParent(packageName)
                 .setController("controller")
                 .setEntity("entity")

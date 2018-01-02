@@ -1,14 +1,15 @@
 package com.webapi.seed.controller;
 
+import com.webapi.seed.controller.base.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author xiaozhong
- * @since 2017-12-31
+ * @since 2018-01-02
  */
 @Controller
 @RequestMapping("/accountRole")
-public class AccountRoleController {
+public class AccountRoleController extends BaseController {
 
 }

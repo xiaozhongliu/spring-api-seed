@@ -2,6 +2,7 @@ package com.webapi.seed.controller;
 
 import com.webapi.seed.auth.IAuthService;
 import com.webapi.seed.config.JwtProps;
+import com.webapi.seed.controller.base.BaseController;
 import com.webapi.seed.domain.AuthRes;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController extends BaseController {
 
     @Autowired
     private JwtProps jwtProps;

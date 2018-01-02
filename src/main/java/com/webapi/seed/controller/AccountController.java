@@ -1,5 +1,6 @@
 package com.webapi.seed.controller;
 
+import com.webapi.seed.controller.base.BaseController;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.service.IAccountService;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/account")
-public class AccountController {
+public class AccountController extends BaseController {
 
     @Autowired
     private IAccountService accountService;

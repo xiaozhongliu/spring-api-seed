@@ -1,12 +1,12 @@
 package ${package.Controller};
 
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
 import org.springframework.stereotype.Controller;
-#end
-#if(${superControllerClassPackage})
-import ${superControllerClassPackage};
 #end
 import org.springframework.web.bind.annotation.RequestMapping;
 

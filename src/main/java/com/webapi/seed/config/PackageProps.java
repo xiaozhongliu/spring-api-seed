@@ -12,6 +12,7 @@ public class PackageProps {
     private String name;
     private String author;
     private String rootPath;
+    private String baseController;
 
     public String getName() {
         return name;
@@ -36,4 +37,13 @@ public class PackageProps {
     public void setRootPath(String rootPath) {
         this.rootPath = rootPath;
     }
+
+    public String getBaseController() {
+        return baseController;
+    }
+
+    public void setBaseController(String baseController) {
+        this.baseController = baseController;
+    }
+
 }

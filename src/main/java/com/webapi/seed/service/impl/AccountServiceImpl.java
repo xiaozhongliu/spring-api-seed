@@ -7,6 +7,8 @@ import com.webapi.seed.entity.Account;
 import com.webapi.seed.service.IAccountService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author xiaozhong
  * @since 2018-01-02
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl extends ServiceImpl<AccountDao, Account> implements IAccountService {
 
     @Override
-    public Iterable<Account> selectAll() {
+    public List<Account> selectAll() {
         return baseMapper.selectList(new EntityWrapper<>());
     }
 

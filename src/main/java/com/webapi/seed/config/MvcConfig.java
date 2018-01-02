@@ -6,11 +6,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class MVCConfig extends WebMvcConfigurerAdapter {
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
     private RequestInterceptor requestInterceptor;
 
-    public MVCConfig(RequestInterceptor requestInterceptor) {
+    public MvcConfig(RequestInterceptor requestInterceptor) {
         this.requestInterceptor = requestInterceptor;
     }
 

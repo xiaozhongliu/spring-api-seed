@@ -27,4 +27,8 @@ public class Result {
         return ResponseEntity.ok(new Result(1, "success", data));
     }
 
+    public static ResponseEntity fail(String msg) {
+        return ResponseEntity.ok(new Result(-1, msg));
+    }
+
 }

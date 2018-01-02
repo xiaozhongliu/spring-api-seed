@@ -44,10 +44,10 @@ public class RequestLogger {
     }
 
     @Around("handling()")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
 
         long startTime = System.currentTimeMillis();
-        Object result = pjp.proceed();
+        Object result = joinPoint.proceed();
         logger.info("TIME  : {} ms", (System.currentTimeMillis() - startTime));
         return result;
     }
