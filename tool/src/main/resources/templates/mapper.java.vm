@@ -1,0 +1,19 @@
+package ${package.Mapper};
+
+import ${superMapperClassPackage};
+import ${package.Entity}.${entity};
+
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+@Mapper
+public interface ${entity}Dao extends ${superMapperClass}<${entity}> {
+
+}
+#end

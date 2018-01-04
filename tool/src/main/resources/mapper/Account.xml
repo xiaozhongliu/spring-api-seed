@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webapi.seed.dao.AccountDao">
+
+    <!-- open second level cache -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- common result map -->
+    <resultMap id="BaseResultMap" type="com.webapi.seed.entity.Account">
+        <id column="account_id" property="accountId"/>
+        <result column="last_password_reset_date" property="lastPasswordResetDate"/>
+        <result column="password" property="password"/>
+        <result column="username" property="username"/>
+        <collection property="roles" ofType="String">
+            <result column="role" property="role"/>
+        </collection>
+    </resultMap>
+
+    <!-- common result columns -->
+    <sql id="Base_Column_List">
+        account_id, last_password_reset_date, password, username
+    </sql>
+
+    <select id="selectByUsername" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+            a.*,
+            ar.role
+        FROM account a
+            JOIN account_role ar ON a.account_id = ar.account_id
+        WHERE a.username = #{username};
+    </select>
+
+</mapper>

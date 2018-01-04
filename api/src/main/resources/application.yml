@@ -1,0 +1,58 @@
+# app
+server:
+  port: 8080
+pack:
+  name: com.webapi.seed
+  author: xiaozhong
+  root-path: ./api/src/main/java
+  base-controller: ${pack.name}.controller.base.BaseController
+
+
+# spring
+spring:
+  datasource:
+    platform: MYSQL
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://fake:3306/test
+    username: liuxiaozhong
+    password: JbKRTggMsuFOwPsJPjZK
+
+
+# jsonwebtoken
+jwt:
+  header: Authorization
+  secret: SGXgvJ92pf
+  expiration: 8640  # 100 days
+  token-head: "Bearer "
+  route:
+    auth:
+      path: /login
+      refresh: /refresh
+      register: /register
+
+
+# mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml     # mapper xml 文件所在路径
+  type-aliases-package: com.webapi.seed.entity  # 实体所在的包, 多个包可以用逗号或者分号分隔, 支持通配符*
+  #type-enums-package: com.webapi.seed.entity.enums  # 自定义枚举所在包
+
+  global-config:
+    id-type: 0                # 主键类型 0:数据库ID自增, 1:用户输入ID, 2:全局唯一ID(数字类型唯一ID), 3:全局唯一ID(UUID)
+    field-strategy: 2         # 字段验证策略 0:忽略判断, 1:非NULL判断, 2:非空判断
+    db-column-underline: true # 表名、字段名、是否使用下划线命名
+    refresh-mapper: true      # 刷新mapper方便调试
+    capital-mode: true        # 是否大写命名
+
+    # 逻辑删除配置 https://github.com/baomidou/mybatis-plus-doc/blob/master/logic-delete.md
+    #logic-delete-value: 0    # 逻辑删除全局值
+    #logic-not-delete-value: 1 # 逻辑未删除全局值
+    #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector  # 逻辑删除SQL注入器
+
+    #key-generator: com.baomidou.springboot.xxx        # 表关键字key生成器
+    #meta-object-handler: com.baomidou.springboot.xxx  # 元对象字段填充控制器
+
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启控制台日志
