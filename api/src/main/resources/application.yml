@@ -4,8 +4,12 @@ server:
 pack:
   name: com.webapi.seed
   author: xiaozhong
-  api-path: ./api/src/main/java
-  base-controller: com.webapi.seed.controller.base.BaseController
+  apiPath: ./api/src/main/java
+  baseController: com.webapi.seed.controller.base.BaseController
+  tables:
+    - account
+    - account_role
+    - bookmark
 
 
 # spring
@@ -34,7 +38,7 @@ jwt:
 # mybatis
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml     # mapper xml 文件所在路径
-  type-aliases-package: com.webapi.seed.entity  # 实体所在的包, 多个包可以用逗号或者分号分隔, 支持通配符*
+  type-aliases-package: com.webapi.seed.entity  # 实体所在的包, 多个包可以用逗号或者分号分隔
   #type-enums-package: com.webapi.seed.entity.enums  # 自定义枚举所在包
 
   global-config:

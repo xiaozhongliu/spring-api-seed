@@ -1,10 +1,8 @@
 package codegen.domain;
 
-import java.util.Map;
-
 public class Config {
 
-    public Map<String, String> pack;
+    public Pack pack;
     public Spring spring;
 
 }

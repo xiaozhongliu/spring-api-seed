@@ -1,6 +1,7 @@
 package codegen;
 
 import codegen.domain.Config;
+import codegen.domain.Pack;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -13,7 +14,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.io.File;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Mybatis Plus Code Generator
+ * mybatis plus code generator
  *
  * @author xiaozhong
  * @since 2017-12-30
@@ -30,11 +30,10 @@ import java.util.Map;
 @SpringBootApplication
 public class Codegen {
 
-    private static ConfigurableApplicationContext context;
     private static Config config;
 
     public static void main(String[] args) {
-        context = SpringApplication.run(Codegen.class, args);
+        SpringApplication.run(Codegen.class, args);
     }
 
     @Bean
@@ -42,26 +41,19 @@ public class Codegen {
         return evt -> {
 
             try {
-                String configPath = "./api/src/main/resources/application.yml";
+                String ymlPath = "./api/src/main/resources/application.yml";
                 ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
                 mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                config = mapper.readValue(new File(configPath), Config.class);
+                config = mapper.readValue(new File(ymlPath), Config.class);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
 
-
-            Map<String, String> pkConfig = config.pack;
+            Pack pkConfig = config.pack;
+            String apiPath = config.pack.apiPath;
             Map<String, String> dsConfig = config.spring.datasource;
-            String apiPath = config.pack.get("api-path");
-            String[] tableNames = {
-                    "account",
-                    "account_role",
-                    "bookmark"
-            };
 
-            GlobalConfig globalConfig;
-            globalConfig = new GlobalConfig();
+            GlobalConfig globalConfig = new GlobalConfig();
             DataSourceConfig dataSourceConfig = new DataSourceConfig();
             StrategyConfig strategyConfig = new StrategyConfig();
             PackageConfig packConfig = new PackageConfig();
@@ -72,7 +64,7 @@ public class Codegen {
                 }
             };
 
-            globalConfig.setAuthor(pkConfig.get("author"))
+            globalConfig.setAuthor(pkConfig.author)
                     .setOpen(false)
                     .setOutputDir(apiPath)
                     .setEnableCache(true)
@@ -86,19 +78,19 @@ public class Codegen {
                     .setUrl(dsConfig.get("url"))
                     .setUsername(dsConfig.get("username"))
                     .setPassword(dsConfig.get("password"));
-            strategyConfig.setInclude(tableNames)
+            strategyConfig.setInclude(pkConfig.tables)
                     .setCapitalMode(true)
                     .setEntityLombokModel(true)
                     .setDbColumnUnderline(true)
                     .setNaming(NamingStrategy.underline_to_camel)
-                    .setSuperControllerClass(pkConfig.get("base-controller"));
-            packConfig.setParent(pkConfig.get("name"))
+                    .setSuperControllerClass(pkConfig.baseController);
+            packConfig.setParent(pkConfig.name)
                     .setController("controller")
                     .setServiceImpl("service")
                     .setEntity("entity")
                     .setMapper("dao");
 
-            // close default generation on dao, xml, service and serviceImpl files
+            // disable default generation on dao, xml, service and serviceImpl files
             tplConfig.setXml(null)
                     .setMapper(null)
                     .setService(null)
@@ -133,8 +125,6 @@ public class Codegen {
                     .setTemplate(tplConfig)
                     .setCfg(injectConfig)
                     .execute();
-
-            context.close();
         };
     }
 

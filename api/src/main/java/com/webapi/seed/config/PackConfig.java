@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationPropertiesBinding
-@ConfigurationProperties(prefix = "package")
+@ConfigurationProperties(prefix = "pack")
 public class PackConfig {
 
     public String name;
     public String author;
     public String apiPath;
     public String baseController;
+    public String[] tables;
 
 }
