@@ -1,6 +1,6 @@
 package com.webapi.seed;
 
-import com.webapi.seed.config.PackageProps;
+import com.webapi.seed.config.PackConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,8 +18,8 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(PackageProps config) {
-        return evt -> logger.info("================== App [{}] Started ==================", config.getName());
+    CommandLineRunner init(PackConfig packConfig) {
+        return evt -> logger.info("================== App [{}] Started ==================", packConfig.name);
     }
 
 }

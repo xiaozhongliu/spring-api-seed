@@ -1,7 +1,7 @@
 package com.webapi.seed.controller;
 
 import com.webapi.seed.auth.IAuthService;
-import com.webapi.seed.config.JwtProps;
+import com.webapi.seed.config.JwtConfig;
 import com.webapi.seed.controller.base.BaseController;
 import com.webapi.seed.domain.AuthRes;
 import com.webapi.seed.domain.Result;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthController extends BaseController {
 
     @Autowired
-    private JwtProps jwtProps;
+    private JwtConfig jwtConfig;
     @Autowired
     private IAuthService authService;
 
@@ -45,7 +45,7 @@ public class AuthController extends BaseController {
 
     @GetMapping(path = "${jwt.route.auth.refresh}")
     public ResponseEntity refreshAndGetAuthToken(HttpServletRequest request) throws AuthenticationException {
-        String token = request.getHeader(jwtProps.getHeader());
+        String token = request.getHeader(jwtConfig.header);
         String refreshedToken = authService.refresh(token);
         if (refreshedToken == null) {
             return ResponseEntity.badRequest().body("no need to refresh");

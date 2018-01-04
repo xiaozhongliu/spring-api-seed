@@ -5,8 +5,8 @@ import com.webapi.seed.domain.BookmarkReq;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.Bookmark;
-import com.webapi.seed.service.IAccountService;
-import com.webapi.seed.service.IBookmarkService;
+import com.webapi.seed.service.impl.AccountService;
+import com.webapi.seed.service.impl.BookmarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,9 +23,9 @@ import javax.validation.Valid;
 public class BookmarkController extends BaseController {
 
     @Autowired
-    private IBookmarkService bookmarkService;
+    private BookmarkService bookmarkService;
     @Autowired
-    private IAccountService accountService;
+    private AccountService accountService;
 
     @GetMapping
     @ResponseBody

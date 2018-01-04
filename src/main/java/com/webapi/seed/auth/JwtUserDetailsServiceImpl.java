@@ -2,8 +2,8 @@ package com.webapi.seed.auth;
 
 import com.webapi.seed.entity.Account;
 import com.webapi.seed.entity.AccountRole;
-import com.webapi.seed.service.IAccountRoleService;
-import com.webapi.seed.service.IAccountService;
+import com.webapi.seed.service.impl.AccountRoleService;
+import com.webapi.seed.service.impl.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +16,9 @@ import java.util.List;
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private IAccountService accountService;
+    private AccountService accountService;
     @Autowired
-    private IAccountRoleService accountRoleService;
+    private AccountRoleService accountRoleService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

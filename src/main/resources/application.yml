@@ -1,7 +1,7 @@
 # app
 server:
   port: 8080
-package:
+pack:
   name: com.webapi.seed
   author: xiaozhong
   root-path: ./src/main/java

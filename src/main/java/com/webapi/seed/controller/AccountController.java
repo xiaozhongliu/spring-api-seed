@@ -3,7 +3,7 @@ package com.webapi.seed.controller;
 import com.webapi.seed.controller.base.BaseController;
 import com.webapi.seed.domain.Result;
 import com.webapi.seed.entity.Account;
-import com.webapi.seed.service.IAccountService;
+import com.webapi.seed.service.impl.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AccountController extends BaseController {
 
     @Autowired
-    private IAccountService accountService;
+    private AccountService accountService;
 
     @GetMapping
     @ResponseBody

@@ -1,6 +1,6 @@
 package com.webapi.seed.auth;
 
-import com.webapi.seed.config.JwtProps;
+import com.webapi.seed.config.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +22,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
-    private JwtProps jwtProps;
+    private JwtConfig jwtConfig;
 
     @Override
     protected void doFilterInternal(
@@ -31,10 +31,10 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             FilterChain chain
     ) throws ServletException, IOException {
 
-        String authHeader = request.getHeader(jwtProps.getHeader());
-        if (authHeader != null && authHeader.startsWith(jwtProps.getTokenHead())) {
+        String authHeader = request.getHeader(jwtConfig.header);
+        if (authHeader != null && authHeader.startsWith(jwtConfig.tokenHead)) {
 
-            final String authToken = authHeader.substring(jwtProps.getTokenHead().length());
+            final String authToken = authHeader.substring(jwtConfig.tokenHead.length());
             String username = jwtTokenUtil.getUsernameFromToken(authToken);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

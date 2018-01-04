@@ -1,6 +1,6 @@
 package com.webapi.seed.auth;
 
-import com.webapi.seed.config.JwtProps;
+import com.webapi.seed.config.JwtConfig;
 import com.webapi.seed.domain.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,7 +20,7 @@ public class JwtTokenUtil {
     private static final String CLAIM_KEY_CREATED = "created";
 
     @Autowired
-    private JwtProps jwtProps;
+    private JwtConfig jwtConfig;
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -79,7 +79,7 @@ public class JwtTokenUtil {
     private Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
-            claims = Jwts.parser().setSigningKey(jwtProps.getSecret()).parseClaimsJws(token).getBody();
+            claims = Jwts.parser().setSigningKey(jwtConfig.secret).parseClaimsJws(token).getBody();
         } catch (Exception e) {
             claims = null;
         }
@@ -92,7 +92,7 @@ public class JwtTokenUtil {
 
     private String generateToken(Map<String, Object> claims) {
         return Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, jwtProps.getSecret()).compact();
+                .signWith(SignatureAlgorithm.HS512, jwtConfig.secret).compact();
     }
 
     private Boolean isTokenExpired(String token) {
@@ -112,7 +112,7 @@ public class JwtTokenUtil {
     }
 
     private Date generateExpirationDate() {
-        Long exp = jwtProps.getExpiration();
+        Long exp = jwtConfig.expiration;
         return new Date(System.currentTimeMillis() + exp * 1000);
     }
 
