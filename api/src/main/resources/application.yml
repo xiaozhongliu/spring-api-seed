@@ -5,7 +5,7 @@ pack:
   name: com.webapi.seed
   author: xiaozhong
   api-path: ./api/src/main/java
-  base-controller: ${pack.name}.controller.base.BaseController
+  base-controller: com.webapi.seed.controller.base.BaseController
 
 
 # spring

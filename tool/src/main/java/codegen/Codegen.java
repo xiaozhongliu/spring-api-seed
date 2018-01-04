@@ -73,9 +73,10 @@ public class Codegen {
             };
 
             globalConfig.setAuthor(pkConfig.get("author"))
+                    .setOpen(false)
                     .setOutputDir(apiPath)
-                    .setFileOverride(false)
-                    .setEnableCache(true)
+                    .setEnableCache(false)
+                    .setFileOverride(true)
                     .setActiveRecord(false)
                     .setBaseResultMap(true)
                     .setBaseColumnList(true)
@@ -90,7 +91,7 @@ public class Codegen {
                     .setEntityLombokModel(true)
                     .setDbColumnUnderline(true)
                     .setNaming(NamingStrategy.underline_to_camel)
-                    .setSuperControllerClass(pkConfig.get("baseController"));
+                    .setSuperControllerClass(pkConfig.get("base-controller"));
             packConfig.setParent(pkConfig.get("name"))
                     .setController("controller")
                     .setServiceImpl("service")
