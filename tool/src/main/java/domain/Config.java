@@ -1,4 +1,4 @@
-package com.webapi.seed.domain;
+package domain;
 
 import lombok.Data;
 

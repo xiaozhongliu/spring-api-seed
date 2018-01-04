@@ -1,5 +1,3 @@
-package com.webapi.seed;
-
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -9,7 +7,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.webapi.seed.domain.Config;
+import domain.Config;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -101,7 +99,7 @@ public class Codegen {
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
             public String outputFile(TableInfo tableInfo) {
-                return String.format("./src/main/resources/mapper/%s.xml", tableInfo.getEntityName());
+                return String.format("./api/src/main/resources/mapper/%s.xml", tableInfo.getEntityName());
             }
         });
         focList.add(new FileOutConfig("/templates/serviceImpl.java.vm") {
