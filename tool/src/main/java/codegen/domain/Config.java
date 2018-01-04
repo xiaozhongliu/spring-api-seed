@@ -1,10 +1,7 @@
-package domain;
-
-import lombok.Data;
+package codegen.domain;
 
 import java.util.Map;
 
-@Data
 public class Config {
 
     public Map<String, String> pack;

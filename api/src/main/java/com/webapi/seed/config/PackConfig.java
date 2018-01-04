@@ -13,7 +13,7 @@ public class PackConfig {
 
     public String name;
     public String author;
-    public String rootPath;
+    public String apiPath;
     public String baseController;
 
 }

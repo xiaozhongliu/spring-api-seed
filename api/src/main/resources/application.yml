@@ -4,7 +4,7 @@ server:
 pack:
   name: com.webapi.seed
   author: xiaozhong
-  root-path: ./api/src/main/java
+  api-path: ./api/src/main/java
   base-controller: ${pack.name}.controller.base.BaseController
 
 
