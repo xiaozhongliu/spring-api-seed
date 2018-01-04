@@ -75,8 +75,8 @@ public class Codegen {
             globalConfig.setAuthor(pkConfig.get("author"))
                     .setOpen(false)
                     .setOutputDir(apiPath)
-                    .setEnableCache(false)
-                    .setFileOverride(true)
+                    .setEnableCache(true)
+                    .setFileOverride(false)
                     .setActiveRecord(false)
                     .setBaseResultMap(true)
                     .setBaseColumnList(true)
@@ -106,19 +106,19 @@ public class Codegen {
 
             // customize out dir of generated files
             List<FileOutConfig> focList = new ArrayList<>();
-            focList.add(new FileOutConfig("/template/mapper.java.vm") {
+            focList.add(new FileOutConfig("/templates/mapper.java.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     return String.format("%s/com/webapi/seed/dao/%sDao.java", apiPath, tableInfo.getEntityName());
                 }
             });
-            focList.add(new FileOutConfig("/template/mapper.xml.vm") {
+            focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     return String.format("./api/src/main/resources/mapper/%s.xml", tableInfo.getEntityName());
                 }
             });
-            focList.add(new FileOutConfig("/template/serviceImpl.java.vm") {
+            focList.add(new FileOutConfig("/templates/serviceImpl.java.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
                     return String.format("%s/com/webapi/seed/service/%sService.java", apiPath, tableInfo.getEntityName());

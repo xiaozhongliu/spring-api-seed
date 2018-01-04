@@ -2,7 +2,6 @@ package ${package.Mapper};
 
 import ${superMapperClassPackage};
 import ${package.Entity}.${entity};
-
 import org.apache.ibatis.annotations.Mapper;
 
 /**

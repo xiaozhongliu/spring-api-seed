@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
 #if(${activeRecord})
 import java.io.Serializable;
 #end
+
 /**
  * @author ${author}
  * @since ${date}
@@ -31,7 +32,7 @@ public class ${entity} extends Model<${entity}> {
 public class ${entity} implements Serializable {
 #end
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
@@ -46,9 +47,9 @@ public class ${entity} implements Serializable {
 #if(${field.keyFlag})
 ## 主键
 #if(${field.keyIdentityFlag})
-	@TableId(value = "${field.name}", type = IdType.AUTO)
+    @TableId(value = "${field.name}", type = IdType.AUTO)
 #elseif(${field.convert})
-	@TableId("${field.name}")
+    @TableId("${field.name}")
 #end
 ## 普通字段
 #elseif(${field.fill})
@@ -65,7 +66,7 @@ public class ${entity} implements Serializable {
 #if(${logicDeleteFieldName}==${field.name})
 	@TableLogic
 #end
-	public ${field.propertyType} ${field.propertyName};
+    public ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
 
