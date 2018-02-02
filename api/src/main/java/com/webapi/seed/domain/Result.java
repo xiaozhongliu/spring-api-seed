@@ -1,19 +1,23 @@
 package com.webapi.seed.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 import org.springframework.http.ResponseEntity;
 
+@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result {
 
-    public int code;
-    public String msg;
-    public Object data;
+    private int code;
+    private String msg;
+    private Object data;
 
-    public Result(int code, String msg) {
+    private Result(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public Result(int code, String msg, Object data) {
+    private Result(int code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;

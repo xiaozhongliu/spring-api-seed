@@ -1,6 +1,6 @@
 package com.webapi.seed.config;
 
-import com.webapi.seed.handler.RequestInterceptor;
+import com.webapi.seed.filter.RequestInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;

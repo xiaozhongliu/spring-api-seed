@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 2017-12-30
  */
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/api/account")
 public class AccountController extends BaseController {
 
     @Autowired

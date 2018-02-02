@@ -1,4 +1,4 @@
-package com.webapi.seed.handler;
+package com.webapi.seed.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
     private Logger logger = LoggerFactory.getLogger("INTERCEPTOR");
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
 //        String path = request.getRequestURI();
 //        String queryString = request.getQueryString();
@@ -28,7 +28,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
 //        logger.info("END {}", response.getStatus());
 

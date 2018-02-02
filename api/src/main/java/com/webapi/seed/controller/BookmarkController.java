@@ -19,7 +19,7 @@ import javax.validation.Valid;
  * @since 2017-12-30
  */
 @Controller
-@RequestMapping("/bookmark")
+@RequestMapping("/api/bookmark")
 public class BookmarkController extends BaseController {
 
     @Autowired
@@ -46,8 +46,8 @@ public class BookmarkController extends BaseController {
     @PostMapping
     @ResponseBody
     public ResponseEntity addBookmark(@Valid @RequestBody BookmarkReq bookmark) {
-        Account account = this.validateUser(bookmark.username);
-        bookmarkService.insert(new Bookmark(account.accountId, bookmark.uri, bookmark.description));
+        Account account = this.validateUser(bookmark.getUsername());
+        bookmarkService.insert(new Bookmark(account.getAccountId(), bookmark.getUri(), bookmark.getDescription()));
         return Result.Ok();
     }
 

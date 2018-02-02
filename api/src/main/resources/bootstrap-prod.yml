@@ -1,0 +1,15 @@
+# remote eureka server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://172.20.0.11:8761/eureka/
+
+# config center
+spring:
+  cloud:
+    config:
+      profile: prod
+      label: config
+      discovery:
+        enabled: true
+        service-id: config-server

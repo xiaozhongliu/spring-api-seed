@@ -1,6 +1,4 @@
 # app
-server:
-  port: 8080
 pack:
   name: com.webapi.seed
   author: xiaozhong
@@ -10,16 +8,27 @@ pack:
     - account
     - account_role
     - bookmark
+  test: foo
 
 
 # spring
+server:
+  port: 9105
 spring:
+  profiles:
+    active: test
+  application:
+    name: spring-api-seed
   datasource:
     platform: MYSQL
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://fake:3306/test
-    username: liuxiaozhong
-    password: JbKRTggMsuFOwPsJPjZK
+    username: test
+    password: 1234Abcd!
+  zipkin:
+    locator:
+      discovery:
+        enabled: true
 
 
 # jsonwebtoken
@@ -46,7 +55,6 @@ mybatis-plus:
     field-strategy: 2         # 字段验证策略 0:忽略判断, 1:非NULL判断, 2:非空判断
     db-column-underline: true # 表名、字段名、是否使用下划线命名
     refresh-mapper: true      # 刷新mapper方便调试
-    capital-mode: true        # 是否大写命名
 
     # 逻辑删除配置 https://github.com/baomidou/mybatis-plus-doc/blob/master/logic-delete.md
     #logic-delete-value: 0    # 逻辑删除全局值
@@ -60,3 +68,9 @@ mybatis-plus:
     cache-enabled: false
     map-underscore-to-camel-case: true
     #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启控制台日志
+
+
+# actuator
+management:
+  security:
+    enabled: false

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @since 2018-01-02
  */
 @Controller
-@RequestMapping("/accountRole")
+@RequestMapping("/api/accountRole")
 public class AccountRoleController extends BaseController {
 
 }

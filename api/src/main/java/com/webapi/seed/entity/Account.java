@@ -23,12 +23,12 @@ public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "account_id", type = IdType.AUTO)
-    public Long accountId;
-    public Date lastPasswordResetDate;
-    public String password;
-    public String username;
+    private Long accountId;
+    private Date lastPasswordResetDate;
+    private String password;
+    private String username;
     @TableField(exist = false)
-    public List<String> roles;
+    private List<String> roles;
 
     public Account() {
     }

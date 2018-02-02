@@ -39,7 +39,7 @@ public class AuthController extends BaseController {
     @PostMapping(path = "${jwt.route.auth.path}")
     @ResponseBody
     public ResponseEntity login(@RequestBody Account account) throws AuthenticationException {
-        String token = authService.login(account.username, account.password);
+        String token = authService.login(account.getUsername(), account.getPassword());
         return Result.Ok(new AuthRes(token));
     }
 

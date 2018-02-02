@@ -20,9 +20,9 @@ public class AccountRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "account_role_id", type = IdType.AUTO)
-    public Long accountRoleId;
-    public String role;
-    public Long accountId;
+    private Long accountRoleId;
+    private String role;
+    private Long accountId;
 
     public AccountRole(Long accountId, String role) {
         this.accountId = accountId;

@@ -1,0 +1,65 @@
+############################################################################
+# prerequisites:
+# 1. admin runner settings:
+#     Runners -> set all runners as protected
+# 2. project settings:
+#     Repository -> add master to protected branches
+#     CI/CD -> git strategy for pipelines: git clone
+############################################################################
+
+stages:
+  - build
+  - deploy
+
+variables:
+  APP_NAME: spring-api-seed
+  APP_PORT: 9105
+  APP_IP: 172.20.0.105
+
+before_script:
+  - whoami && pwd && ls -l
+
+build:
+  stage: build
+  tags:
+    - shell-runner
+  script:
+    # generate deploy related files
+    - sh ./filegen.sh
+
+    # build jar package
+    - mvn clean package
+
+    # stop and remove
+    - >
+      if [ "$(docker ps -a -q -f ancestor=$APP_NAME)" ] ; then
+        docker stop $(docker ps -a -q -f ancestor=$APP_NAME)
+        docker rm $(docker ps -a -q -f ancestor=$APP_NAME)
+      fi
+
+    # build image
+    - docker build -t $APP_NAME .
+
+deploy:
+  stage: deploy
+  tags:
+    - shell-runner
+  script:
+    # - docker network create -d bridge --subnet 172.20.0.0/16 my
+    - docker run --network=my --ip=$APP_IP -p $APP_PORT:$APP_PORT -d $APP_NAME
+    # starts the second instance to compose a cluster behind ribbon
+    - docker run --network=my --ip=172.20.0.5 -p 9005:9105 -d spring-api-seed
+
+    # clean up useless containers/images/volumes
+    - >
+      if [ "$(docker ps -a -q -f status=exited)" ] ; then
+        docker rm $(docker ps -a -q -f status=exited)
+      fi
+    - >
+      if [ "$(docker images -q -f dangling=true)" ] ; then
+        docker image rm $(docker images -q -f dangling=true)
+      fi
+    - >
+      if [ "$(docker volume ls -q -f dangling=true)" ] ; then
+        docker volume rm $(docker volume ls -q -f dangling=true)
+      fi

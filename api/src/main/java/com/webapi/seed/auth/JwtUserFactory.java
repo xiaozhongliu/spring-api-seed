@@ -14,17 +14,17 @@ public class JwtUserFactory {
 
     public static JwtUser create(Account account, List<AccountRole> roles) {
         return new JwtUser(
-                account.accountId,
-                account.username,
-                account.password,
+                account.getAccountId(),
+                account.getUsername(),
+                account.getPassword(),
                 mapToGrantedAuthorities(roles),
-                account.lastPasswordResetDate
+                account.getLastPasswordResetDate()
         );
     }
 
     private static Collection<GrantedAuthority> mapToGrantedAuthorities(List<AccountRole> accountRoles) {
         return accountRoles.stream()
-                .map(accountRole -> new SimpleGrantedAuthority(accountRole.role))
+                .map(accountRole -> new SimpleGrantedAuthority(accountRole.getRole()))
                 .collect(Collectors.toSet());
     }
 

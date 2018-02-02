@@ -16,5 +16,6 @@ public class PackConfig {
     public String apiPath;
     public String baseController;
     public String[] tables;
+    public String test;
 
 }

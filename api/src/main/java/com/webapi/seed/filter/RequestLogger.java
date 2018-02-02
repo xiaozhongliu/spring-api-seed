@@ -1,4 +1,4 @@
-package com.webapi.seed.handler;
+package com.webapi.seed.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.JoinPoint;
@@ -56,7 +56,7 @@ public class RequestLogger {
     public void doAfterReturning(ResponseEntity response) throws Throwable {
 
         logger.info(
-                "END   : {} {}\n",
+                "RESP  : {} {}\n",
                 response.getStatusCode(),
                 new ObjectMapper().writeValueAsString(response.getBody())
         );

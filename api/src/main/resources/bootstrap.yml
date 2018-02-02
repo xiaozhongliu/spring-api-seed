@@ -1,0 +1,7 @@
+spring:
+  profiles:
+    active: test
+  cloud:
+    config:
+      username: config.reader
+      password: 8qt6xJxtRZrzf6Ild65UwBJNIc3mud2n

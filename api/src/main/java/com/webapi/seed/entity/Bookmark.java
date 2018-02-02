@@ -20,10 +20,10 @@ public class Bookmark implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "bookmark_id", type = IdType.AUTO)
-    public Long bookmarkId;
-    public String description;
-    public String uri;
-    public Long accountId;
+    private Long bookmarkId;
+    private String description;
+    private String uri;
+    private Long accountId;
 
     public Bookmark(Long accountId, String description, String uri) {
         this.accountId = accountId;

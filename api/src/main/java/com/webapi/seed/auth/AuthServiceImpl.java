@@ -47,16 +47,16 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public boolean register(Account account) {
-        if (accountService.selectByUsername(account.username) != null) {
+        if (accountService.selectByUsername(account.getUsername()) != null) {
             return false;
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        account.password = encoder.encode(account.password);
-        account.lastPasswordResetDate = new Date();
+        account.setPassword(encoder.encode(account.getPassword()));
+        account.setLastPasswordResetDate(new Date());
         boolean accountResult = accountService.insert(account);
 
-        AccountRole accountRole = new AccountRole(account.accountId, "ROLE_USER");
+        AccountRole accountRole = new AccountRole(account.getAccountId(), "ROLE_USER");
         boolean accountRoleResult = accountRoleService.insert(accountRole);
 
         return accountResult && accountRoleResult;
