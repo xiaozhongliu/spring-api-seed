@@ -1,6 +1,6 @@
 package ${package.Mapper};
 
-import ${superMapperClassPackage};
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import ${package.Entity}.${entity};
 import org.apache.ibatis.annotations.Mapper;
 

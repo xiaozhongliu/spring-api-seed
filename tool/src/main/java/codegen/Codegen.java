@@ -104,12 +104,12 @@ public class Codegen {
                     return String.format("%s/com/example/dao/%sDao.java", apiPath, tableInfo.getEntityName());
                 }
             });
-            focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
-                @Override
-                public String outputFile(TableInfo tableInfo) {
-                    return String.format("./api/src/main/resources/mapper/%s.xml", tableInfo.getEntityName());
-                }
-            });
+            // focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
+            //     @Override
+            //     public String outputFile(TableInfo tableInfo) {
+            //         return String.format("./api/src/main/resources/mapper/%s.xml", tableInfo.getEntityName());
+            //     }
+            // });
             focList.add(new FileOutConfig("/templates/serviceImpl.java.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {

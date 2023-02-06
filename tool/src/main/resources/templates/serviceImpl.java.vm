@@ -1,9 +1,8 @@
 package ${package.ServiceImpl};
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package.Mapper}.${table.mapperName};
-import ${superServiceImplClassPackage};
 import ${package.Entity}.${entity};
-
 import org.springframework.stereotype.Service;
 
 /**

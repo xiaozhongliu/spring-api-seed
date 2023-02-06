@@ -1,7 +1,9 @@
 package ${package.Service};
 
-import ${superServiceClassPackage};
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import ${package.Mapper}.${entity}Dao;
 import ${package.Entity}.${entity};
+import org.springframework.stereotype.Service;
 
 /**
  * @author ${author}

@@ -3,8 +3,12 @@ pack:
   name: com.example
   author: xiaozhong
   apiPath: ./api/src/main/java
-  baseController: com.example.controller.base.BaseController
+  # baseController: com.example.controller.base.BaseController
   tables:
+    - role
+    - right
+    - role_right
+    - staff
     - evection_monthly
     - evection_detail
   test: foo
