@@ -1,13 +1,12 @@
 # app
 pack:
-  name: com.webapi.seed
+  name: com.example
   author: xiaozhong
   apiPath: ./api/src/main/java
-  baseController: com.webapi.seed.controller.base.BaseController
+  baseController: com.example.controller.base.BaseController
   tables:
-    - account
-    - account_role
-    - bookmark
+    - evection_monthly
+    - evection_detail
   test: foo
 
 
@@ -22,7 +21,7 @@ spring:
   datasource:
     platform: MYSQL
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://fake:3306/test
+    url: jdbc:mysql://localhost:3306/demo?useSSL=false
     username: test
     password: 1234Abcd!
   zipkin:
@@ -47,8 +46,8 @@ jwt:
 # mybatis
 mybatis-plus:
   mapper-locations: classpath:/mapper/*.xml     # mapper xml 文件所在路径
-  type-aliases-package: com.webapi.seed.entity  # 实体所在的包, 多个包可以用逗号或者分号分隔
-  #type-enums-package: com.webapi.seed.entity.enums  # 自定义枚举所在包
+  type-aliases-package: com.example.entity  # 实体所在的包, 多个包可以用逗号或者分号分隔
+  #type-enums-package: com.example.entity.enums  # 自定义枚举所在包
 
   global-config:
     id-type: 0                # 主键类型 0:数据库ID自增, 1:用户输入ID, 2:全局唯一ID(数字类型唯一ID), 3:全局唯一ID(UUID)

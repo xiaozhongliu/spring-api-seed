@@ -101,7 +101,7 @@ public class Codegen {
             focList.add(new FileOutConfig("/templates/mapper.java.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return String.format("%s/com/webapi/seed/dao/%sDao.java", apiPath, tableInfo.getEntityName());
+                    return String.format("%s/com/example/dao/%sDao.java", apiPath, tableInfo.getEntityName());
                 }
             });
             focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
@@ -113,7 +113,7 @@ public class Codegen {
             focList.add(new FileOutConfig("/templates/serviceImpl.java.vm") {
                 @Override
                 public String outputFile(TableInfo tableInfo) {
-                    return String.format("%s/com/webapi/seed/service/%sService.java", apiPath, tableInfo.getEntityName());
+                    return String.format("%s/com/example/service/%sService.java", apiPath, tableInfo.getEntityName());
                 }
             });
             injectConfig.setFileOutConfigList(focList);

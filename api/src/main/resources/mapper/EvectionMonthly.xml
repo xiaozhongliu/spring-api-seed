@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.EvectionMonthlyDao">
+
+    <!-- open second level cache -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- common result map -->
+    <resultMap id="BaseResultMap" type="com.example.entity.EvectionMonthly">
+        <id column="evection_monthly_id" property="evectionMonthlyId"/>
+        <result column="evection_monthly_code" property="evectionMonthlyCode"/>
+        <result column="staff_name" property="staffName"/>
+        <result column="evection_month" property="evectionMonth"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="evection_days" property="evectionDays"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="status" property="status"/>
+        <result column="active" property="active"/>
+        <result column="assignee_group" property="assigneeGroup"/>
+        <result column="assignee" property="assignee"/>
+        <result column="comment" property="comment"/>
+        <result column="deleted" property="deleted"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <!-- common result columns -->
+    <sql id="Base_Column_List">
+        evection_monthly_id, evection_monthly_code, staff_name, evection_month, start_date, end_date, evection_days, total_amount, status, active, assignee_group, assignee, comment, deleted, created_at, updated_at
+    </sql>
+
+</mapper>

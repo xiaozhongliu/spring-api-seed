@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.EvectionDetailDao">
+
+    <!-- open second level cache -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- common result map -->
+    <resultMap id="BaseResultMap" type="com.example.entity.EvectionDetail">
+        <id column="evection_detail_id" property="evectionDetailId"/>
+        <result column="evection_detail_code" property="evectionDetailCode"/>
+        <result column="staff_name" property="staffName"/>
+        <result column="evection_monthly_code" property="evectionMonthlyCode"/>
+        <result column="evection_date" property="evectionDate"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="project_name" property="projectName"/>
+        <result column="destination" property="destination"/>
+        <result column="fee_type" property="feeType"/>
+        <result column="fee_amount" property="feeAmount"/>
+        <result column="vehicle" property="vehicle"/>
+        <result column="from_place" property="fromPlace"/>
+        <result column="to_place" property="toPlace"/>
+        <result column="apply_type" property="applyType"/>
+        <result column="comment" property="comment"/>
+        <result column="deleted" property="deleted"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <!-- common result columns -->
+    <sql id="Base_Column_List">
+        evection_detail_id, evection_detail_code, staff_name, evection_monthly_code, evection_date, project_code, project_name, destination, fee_type, fee_amount, vehicle, from_place, to_place, apply_type, comment, deleted, created_at, updated_at
+    </sql>
+
+</mapper>

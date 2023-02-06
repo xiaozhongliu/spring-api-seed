@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Codegen",
+            "request": "launch",
+            "mainClass": "codegen.Codegen",
+            "projectName": "tool"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch)-Application<seed>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
