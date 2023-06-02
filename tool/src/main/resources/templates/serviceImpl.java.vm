@@ -1,8 +1,8 @@
 package ${package.ServiceImpl};
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import ${package.Mapper}.${table.mapperName};
 import ${package.Entity}.${entity};
+import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,7 +15,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 #else
-public class ${entity}Service extends ${superServiceImplClass}<${table.mapperName}, ${entity}> {
+public class ${entity}Service extends MPJBaseServiceImpl<${table.mapperName}, ${entity}> {
 
 }
 #end

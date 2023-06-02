@@ -3,11 +3,16 @@ package ${package.Controller};
 #if(${superControllerClassPackage})
 import ${superControllerClassPackage};
 #end
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.common.Pager;
 import com.example.common.Result;
+import com.example.controller.${table.entityPath}.dto.${table.entityName}Dto;
+import com.example.entity.${table.entityName};
+import com.example.service.${table.entityName}Service;
+import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +30,50 @@ public class ${table.controllerName} extends ${superControllerClass} {
 #else
 public class ${table.controllerName} {
 #end
+
+    @Autowired
+    private ${table.entityName}Service ${table.entityPath}Service;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @GetMapping("/paged")
+    public ResponseEntity<Result> getPaged${table.entityName}List(${table.entityName}Dto criteria, @Valid Pager pager) {
+        var page = new Page<${table.entityName}>(pager.current, pager.size);
+        var query = new MPJLambdaWrapper<${table.entityName}>()
+                .eq(${table.entityName}::getDeleted, 0);
+        var result = ${table.entityPath}Service.page(page, query);
+        return Result.Ok(result);
+    }
+
+    @GetMapping
+    public ResponseEntity<Result> get${table.entityName}List(${table.entityName}Dto criteria) {
+        var query = new MPJLambdaWrapper<${table.entityName}>()
+                .eq(${table.entityName}::getDeleted, 0);
+        var result = ${table.entityPath}Service.list(query);
+        return Result.Ok(result);
+    }
+
+    @GetMapping("/{${table.entityPath}Id}")
+    public ResponseEntity<Result> get${table.entityName}(@PathVariable long ${table.entityPath}Id) {
+        var result = ${table.entityPath}Service.getById(${table.entityPath}Id);
+        return Result.Ok(result);
+    }
+
+    @PostMapping
+    public ResponseEntity<Result> save${table.entityName}(@Valid @RequestBody ${table.entityName}Dto body) {
+        var entity = modelMapper.map(body, ${table.entityName}.class);
+        ${table.entityPath}Service.saveOrUpdate(entity);
+        return Result.Ok();
+    }
+
+    @DeleteMapping("/{${table.entityPath}Id}")
+    public ResponseEntity<Result> delete${table.entityName}(@PathVariable long ${table.entityPath}Id) {
+        // logically delete
+        var entity = new ${table.entityName}();
+        entity.set${table.entityName}Id(${table.entityPath}Id);
+        entity.setDeleted(1);
+        ${table.entityPath}Service.updateById(entity);
+        return Result.Ok();
+    }
 
 }

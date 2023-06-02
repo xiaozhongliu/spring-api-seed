@@ -8,7 +8,7 @@ pack:
     - role
     - right
     - role_right
-    - staff
+    - user
     - evection_monthly
     - evection_detail
   test: foo

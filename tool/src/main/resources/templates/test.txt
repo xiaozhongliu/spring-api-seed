@@ -1,0 +1,13 @@
+${table.name}
+${table.comment}
+${table.entityPath}
+${table.entityName}
+${table.mapperName}
+${table.xmlName}
+${table.serviceName}
+${table.serviceImplName}
+${table.controllerName}
+${table.fields}
+${table.commonFields}
+${table.importPackages}
+${table.fieldNames}
